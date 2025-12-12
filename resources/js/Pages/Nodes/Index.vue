@@ -42,7 +42,7 @@ const submit = () => {
 </script>
 
 <template>
-    <Head title="Governance Nodes" />
+    <Head title="Node Pemerintahan" />
 
     <AuthenticatedLayout>
         <div class="fixed inset-0 z-0 pointer-events-none">
@@ -59,13 +59,13 @@ const submit = () => {
                         <GlobeAltIcon class="w-8 h-8 text-indigo-600" />
                     </div>
                     <div>
-                        <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Governance Nodes</h2>
+                        <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Node Pemerintahan</h2>
                         <div class="flex items-center space-x-2 text-sm text-slate-500">
                             <span class="relative flex h-2 w-2">
                                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                                 <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                             </span>
-                            <span>Global Institutional Network Tracker</span>
+                            <span>Pelacak Jaringan Institusi Global</span>
                         </div>
                     </div>
                 </div>
@@ -76,7 +76,7 @@ const submit = () => {
                     class="group inline-flex items-center justify-center px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-indigo-500/30 transition-all duration-300"
                 >
                     <component :is="showForm ? XMarkIcon : PlusIcon" class="w-5 h-5 mr-2 transition-transform group-hover:rotate-90" />
-                    {{ showForm ? 'Cancel Entry' : 'Register Node' }}
+                    {{ showForm ? 'Batal' : 'Daftarkan Node' }}
                 </button>
             </div>
         </template>
@@ -96,38 +96,38 @@ const submit = () => {
                         <div class="px-6 py-4 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
                             <h3 class="font-bold text-slate-800 flex items-center">
                                 <BuildingLibraryIcon class="w-5 h-5 mr-2 text-indigo-500" />
-                                Institutional Data Entry
+                                Entri Data Institusi
                             </h3>
-                            <span class="text-[10px] font-mono text-slate-400 uppercase tracking-widest">Geo-Tagging Protocol</span>
+                            <span class="text-[10px] font-mono text-slate-400 uppercase tracking-widest">Protokol Geo-Tagging</span>
                         </div>
                         
                         <form @submit.prevent="submit" class="p-6 md:p-8">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div class="space-y-5">
                                     <div>
-                                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Institution Name</label>
+                                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Nama Institusi</label>
                                         <input 
                                             v-model="form.name" 
                                             type="text" 
                                             class="block w-full rounded-xl border-slate-200 bg-slate-50 focus:border-indigo-500 focus:ring-indigo-500 transition-colors" 
-                                            placeholder="e.g. Center for Digital Democracy"
+                                            placeholder="contoh: Pusat Demokrasi Digital"
                                             required 
                                         />
                                     </div>
                                     <div>
-                                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Department / Unit</label>
+                                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Departemen / Unit</label>
                                         <input 
                                             v-model="form.institution" 
                                             type="text" 
                                             class="block w-full rounded-xl border-slate-200 bg-slate-50 focus:border-indigo-500 focus:ring-indigo-500 transition-colors" 
-                                            placeholder="e.g. Faculty of Social Sciences"
+                                            placeholder="contoh: Fakultas Ilmu Sosial"
                                         />
                                     </div>
                                 </div>
 
                                 <div class="space-y-5">
                                     <div>
-                                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Country / Region</label>
+                                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Negara / Wilayah</label>
                                         <div class="relative">
                                             <input 
                                                 v-model="form.country" 
@@ -141,7 +141,7 @@ const submit = () => {
                                     </div>
                                     
                                     <div>
-                                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Geospatial Coordinates</label>
+                                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Koordinat Geospasial</label>
                                         <div class="grid grid-cols-2 gap-3">
                                             <div class="relative">
                                                 <input 
@@ -177,7 +177,7 @@ const submit = () => {
                                     class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-xl shadow-md transition-all disabled:opacity-50"
                                 >
                                     <MapPinIcon class="w-5 h-5 mr-2" />
-                                    Initialize Node
+                                    Inisialisasi Node
                                 </button>
                             </div>
                         </form>
@@ -189,12 +189,12 @@ const submit = () => {
                         <div>
                             <h3 class="text-white font-bold text-lg flex items-center shadow-black drop-shadow-md">
                                 <SignalIcon class="w-5 h-5 mr-2 text-emerald-400 animate-pulse" />
-                                Network Topology
+                                Topologi Jaringan
                             </h3>
-                            <p class="text-slate-300 text-xs shadow-black drop-shadow-md pl-7">{{ nodes.length }} active nodes connected</p>
+                            <p class="text-slate-300 text-xs shadow-black drop-shadow-md pl-7">{{ nodes.length }} node aktif terhubung</p>
                         </div>
                         <div class="bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 text-xs font-mono text-white">
-                            LIVE VIEW
+                            TAMPILAN LANGSUNG
                         </div>
                     </div>
 
@@ -205,8 +205,8 @@ const submit = () => {
 
                 <div class="pt-8">
                     <div class="flex items-center justify-between mb-6">
-                        <h3 class="text-xl font-bold text-slate-900">Registered Nodes</h3>
-                        <div class="text-sm text-slate-500">Sorted by recent activity</div>
+                        <h3 class="text-xl font-bold text-slate-900">Node Terdaftar</h3>
+                        <div class="text-sm text-slate-500">Diurutkan berdasarkan aktivitas terbaru</div>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -231,7 +231,7 @@ const submit = () => {
                                     {{ node.name }}
                                 </h4>
                                 <p class="text-sm text-slate-500 mb-4 h-10 line-clamp-2">
-                                    {{ node.institution || 'Institutional affiliation not specified' }}
+                                    {{ node.institution || 'Afiliasi institusi tidak ditentukan' }}
                                 </p>
 
                                 <div class="flex items-center justify-between pt-4 border-t border-slate-100">
@@ -253,9 +253,9 @@ const submit = () => {
                         <div class="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6">
                             <GlobeAltIcon class="w-10 h-10 text-slate-400" />
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900">Network Offline</h3>
+                        <h3 class="text-xl font-bold text-slate-900">Jaringan Offline</h3>
                         <p class="text-slate-500 mt-2 max-w-sm mx-auto mb-8">
-                            No governance nodes have been registered in the system yet. Initialize the first node to begin mapping.
+                            Belum ada node pemerintahan yang terdaftar dalam sistem. Inisialisasi node pertama untuk memulai pemetaan.
                         </p>
                         <button
                             v-if="canManageNodes"
@@ -263,7 +263,7 @@ const submit = () => {
                             class="inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl transition-all shadow-lg hover:shadow-indigo-500/25"
                         >
                             <PlusIcon class="w-5 h-5 mr-2" />
-                            Initialize First Node
+                            Inisialisasi Node Pertama
                         </button>
                     </div>
                 </div>

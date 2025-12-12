@@ -34,19 +34,19 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <Head title="Register" />
+        <Head title="Daftar" />
 
         <div class="p-8">
             <!-- Header -->
             <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold text-gray-900">Create Account</h2>
-                <p class="mt-2 text-sm text-gray-600">Join the NeuroDemocracy community</p>
+                <h2 class="text-3xl font-bold text-gray-900">Buat Akun</h2>
+                <p class="mt-2 text-sm text-gray-600">Bergabunglah dengan komunitas DPP</p>
             </div>
 
             <form @submit.prevent="submit" class="space-y-6">
                 <!-- Name -->
                 <div>
-                    <InputLabel for="name" value="Full Name" class="mb-2" />
+                    <InputLabel for="name" value="Nama Lengkap" class="mb-2" />
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <UserIcon class="h-5 w-5 text-gray-400" />
@@ -59,7 +59,7 @@ const submit = () => {
                             required
                             autofocus
                             autocomplete="name"
-                            placeholder="John Doe"
+                            placeholder="Nama Anda"
                         />
                     </div>
                     <InputError class="mt-2" :message="form.errors.name" />
@@ -67,7 +67,7 @@ const submit = () => {
 
                 <!-- Email -->
                 <div>
-                    <InputLabel for="email" value="Email Address" class="mb-2" />
+                    <InputLabel for="email" value="Alamat Email" class="mb-2" />
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <EnvelopeIcon class="h-5 w-5 text-gray-400" />
@@ -79,7 +79,7 @@ const submit = () => {
                             v-model="form.email"
                             required
                             autocomplete="username"
-                            placeholder="you@example.com"
+                            placeholder="anda@contoh.com"
                         />
                     </div>
                     <InputError class="mt-2" :message="form.errors.email" />
@@ -87,7 +87,7 @@ const submit = () => {
 
                 <!-- Password -->
                 <div>
-                    <InputLabel for="password" value="Password" class="mb-2" />
+                    <InputLabel for="password" value="Kata Sandi" class="mb-2" />
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <LockClosedIcon class="h-5 w-5 text-gray-400" />
@@ -115,7 +115,7 @@ const submit = () => {
 
                 <!-- Confirm Password -->
                 <div>
-                    <InputLabel for="password_confirmation" value="Confirm Password" class="mb-2" />
+                    <InputLabel for="password_confirmation" value="Konfirmasi Kata Sandi" class="mb-2" />
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <LockClosedIcon class="h-5 w-5 text-gray-400" />
@@ -148,7 +148,7 @@ const submit = () => {
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing"
                     >
-                        <span>Create Account</span>
+                        <span>Buat Akun</span>
                         <ArrowRightIcon class="ml-2 w-4 h-4" />
                     </PrimaryButton>
                 </div>
@@ -156,12 +156,12 @@ const submit = () => {
                 <!-- Login Link -->
                 <div class="text-center pt-4 border-t border-gray-200">
                     <p class="text-sm text-gray-600">
-                        Already have an account?
+                        Sudah punya akun?
                         <Link
                             :href="route('login')"
                             class="font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
                         >
-                            Sign in
+                            Masuk
                         </Link>
                     </p>
                 </div>

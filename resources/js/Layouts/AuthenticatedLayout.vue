@@ -21,10 +21,10 @@ const showingNavigationDropdown = ref(false);
 
 const navigation = [
     { name: 'Dashboard', route: 'dashboard', icon: Squares2X2Icon },
-    { name: 'Governance Nodes', route: 'nodes.index', icon: GlobeAltIcon },
-    { name: 'Governance Atlas', route: 'atlas.index', icon: ChartBarIcon },
-    { name: 'Civic Labs', route: 'labs.index', icon: ChatBubbleLeftRightIcon },
-    { name: 'Simulation Engine', route: 'simulation.index', icon: BeakerIcon }
+    { name: 'Node Pemerintahan', route: 'nodes.index', icon: GlobeAltIcon },
+    { name: 'Atlas Pemerintahan', route: 'atlas.index', icon: ChartBarIcon },
+    { name: 'Lab Sipil', route: 'labs.index', icon: ChatBubbleLeftRightIcon },
+    { name: 'Mesin Simulasi', route: 'simulation.index', icon: BeakerIcon }
 ];
 
 const page = usePage();
@@ -94,7 +94,7 @@ const page = usePage();
                                         class="group flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
                                     >
                                         <UserCircleIcon class="h-5 w-5 text-slate-400 group-hover:text-indigo-600" />
-                                        <span>Profile Settings</span>
+                                        <span>Pengaturan Profil</span>
                                     </Link>
                                     
                                     <!-- Logout Link -->
@@ -105,7 +105,7 @@ const page = usePage();
                                         class="w-full group flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-rose-50 hover:text-rose-600 transition-colors"
                                     >
                                         <ArrowRightOnRectangleIcon class="h-5 w-5 text-slate-400 group-hover:text-rose-600" />
-                                        <span>Log Out</span>
+                                        <span>Keluar</span>
                                     </Link>
                                 </div>
                             </li>
@@ -138,11 +138,11 @@ const page = usePage();
                         </div>
                         <DropdownLink :href="route('profile.edit')" class="flex items-center space-x-2">
                             <UserCircleIcon class="w-4 h-4" />
-                            <span>Profile Settings</span>
+                            <span>Pengaturan Profil</span>
                         </DropdownLink>
                         <DropdownLink :href="route('logout')" method="post" as="button" class="flex items-center space-x-2 text-rose-600">
                             <ArrowRightOnRectangleIcon class="w-4 h-4" />
-                            <span>Log Out</span>
+                            <span>Keluar</span>
                         </DropdownLink>
                     </template>
                 </Dropdown>

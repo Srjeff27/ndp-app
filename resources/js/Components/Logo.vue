@@ -42,14 +42,14 @@ const textSizeClasses = computed(() => {
 <template>
     <div class="flex items-center space-x-3">
         <div :class="sizeClasses" class="flex-shrink-0 text-indigo-600">
-            <img src="/images/logo.svg" alt="NeuroDemocracy Protocol" class="w-full h-full" />
+            <img src="/images/logo.svg" alt="Democracy Protocol Policy" class="w-full h-full" />
         </div>
         <span 
             v-if="variant === 'full'" 
             :class="[textSizeClasses, textColor]"
             class="font-bold tracking-tight"
         >
-            NeuroDemocracy
+            DPP
         </span>
     </div>
 </template>

@@ -26,32 +26,32 @@ const isLoaded = ref(false);
 
 const features = [
     {
-        name: 'Governance Nodes',
-        description: 'Map and track accountability across institutions worldwide with interactive visualization.',
+        name: 'Node Pemerintahan',
+        description: 'Petakan dan lacak akuntabilitas di seluruh institusi di seluruh dunia dengan visualisasi interaktif.',
         icon: GlobeAltIcon,
         color: 'text-blue-500',
         bg: 'bg-blue-500/10',
         border: 'group-hover:border-blue-500/50'
     },
     {
-        name: 'Governance Atlas',
-        description: 'Comprehensive indicators and metrics for measuring public accountability.',
+        name: 'Atlas Pemerintahan',
+        description: 'Indikator dan metrik komprehensif untuk mengukur akuntabilitas publik.',
         icon: ChartBarIcon,
         color: 'text-emerald-500',
         bg: 'bg-emerald-500/10',
         border: 'group-hover:border-emerald-500/50'
     },
     {
-        name: 'Civic Labs',
-        description: 'Collaborative spaces for policy discussions and democratic deliberation.',
+        name: 'Lab Sipil',
+        description: 'Ruang kolaboratif untuk diskusi kebijakan dan deliberasi demokratis.',
         icon: ChatBubbleLeftRightIcon,
         color: 'text-amber-500',
         bg: 'bg-amber-500/10',
         border: 'group-hover:border-amber-500/50'
     },
     {
-        name: 'Simulation Engine',
-        description: 'Model policy changes and predict their impact on governance indicators.',
+        name: 'Mesin Simulasi',
+        description: 'Modelkan perubahan kebijakan dan prediksi dampaknya terhadap indikator pemerintahan.',
         icon: BeakerIcon,
         color: 'text-rose-500',
         bg: 'bg-rose-500/10',
@@ -60,9 +60,9 @@ const features = [
 ];
 
 const benefits = [
-    { icon: AcademicCapIcon, text: 'Research-backed Methodology' },
-    { icon: ShieldCheckIcon, text: 'Transparent & Accountable' },
-    { icon: SparklesIcon, text: 'Data-driven Insights' }
+    { icon: AcademicCapIcon, text: 'Metodologi Berbasis Riset' },
+    { icon: ShieldCheckIcon, text: 'Transparan & Akuntabel' },
+    { icon: SparklesIcon, text: 'Wawasan Berbasis Data' }
 ];
 
 onMounted(() => {
@@ -73,7 +73,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <Head title="NeuroDemocracy Protocol" />
+    <Head title="Democracy Protocol Policy" />
 
     <div class="min-h-screen bg-slate-50 text-slate-900 selection:bg-indigo-500 selection:text-white font-sans overflow-x-hidden">
         
@@ -96,10 +96,10 @@ onMounted(() => {
                         </div>
                         <div class="flex flex-col">
                             <span class="text-xl font-bold tracking-tight text-slate-900">
-                                NeuroDemocracy
+                                DPP
                             </span>
                             <span class="text-[10px] uppercase tracking-widest font-semibold text-indigo-600">
-                                Protocol v1.0
+                                Democracy Protocol Policy
                             </span>
                         </div>
                     </div>
@@ -107,10 +107,10 @@ onMounted(() => {
                     <div class="hidden md:flex items-center space-x-8">
                         <template v-if="canLogin">
                             <Link :href="route('login')" class="text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors">
-                                Log in
+                                Masuk
                             </Link>
                             <Link v-if="canRegister" :href="route('register')" class="group relative inline-flex items-center justify-center px-6 py-2.5 text-sm font-semibold text-white transition-all duration-200 bg-slate-900 rounded-full hover:bg-indigo-600 hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
-                                <span>Get Started</span>
+                                <span>Mulai</span>
                                 <ArrowRightIcon class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                             </Link>
                         </template>
@@ -136,10 +136,10 @@ onMounted(() => {
                 <div v-show="showingNavigationDropdown" class="md:hidden border-t border-slate-200 bg-white/90 backdrop-blur-xl">
                     <div class="pt-4 pb-6 px-4 space-y-3">
                         <Link :href="route('login')" class="block w-full text-center py-3 text-slate-600 font-medium hover:bg-slate-50 rounded-lg">
-                            Log in
+                            Masuk
                         </Link>
                         <Link v-if="canRegister" :href="route('register')" class="block w-full text-center py-3 bg-indigo-600 text-white font-medium rounded-lg shadow-md hover:bg-indigo-700">
-                            Register Now
+                            Daftar Sekarang
                         </Link>
                     </div>
                 </div>
@@ -154,16 +154,16 @@ onMounted(() => {
                         class="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium leading-6 text-indigo-600 ring-1 ring-inset ring-indigo-600/20 bg-indigo-50/50 mb-8 transition-all duration-700 transform"
                         :class="isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'"
                     >
-                        <span>Academically Verified Protocol</span>
+                        <span>Platform Terverifikasi Akademis</span>
                     </div>
 
                     <h1 
                         class="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 mb-8 transition-all duration-700 delay-100 transform"
                         :class="isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'"
                     >
-                        Mapping the Future of <br class="hidden sm:block" />
+                        Platform Pengawasan Kebijakan <br class="hidden sm:block" />
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-violet-600 to-fuchsia-600 animate-gradient-x">
-                            Democratic Accountability
+                            Pemerintah Berbasis AI
                         </span>
                     </h1>
 
@@ -171,7 +171,7 @@ onMounted(() => {
                         class="text-lg sm:text-xl text-slate-600 mb-10 leading-relaxed max-w-2xl mx-auto transition-all duration-700 delay-200 transform"
                         :class="isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'"
                     >
-                        A collaborative platform leveraging advanced data structures to track, analyze, and enhance public governance through rigorous insight and civic engagement.
+                        Platform kolaboratif yang memanfaatkan struktur data canggih untuk melacak, menganalisis, dan meningkatkan tata kelola pemerintahan melalui wawasan yang ketat dan keterlibatan sipil.
                     </p>
 
                     <div 
@@ -179,10 +179,10 @@ onMounted(() => {
                         :class="isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'"
                     >
                         <Link v-if="canRegister" :href="route('register')" class="w-full sm:w-auto px-8 py-4 bg-slate-900 text-white rounded-xl font-bold text-lg hover:shadow-2xl hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300">
-                            Start Exploring
+                            Mulai Jelajahi
                         </Link>
                         <a href="#features" class="w-full sm:w-auto px-8 py-4 bg-white border border-slate-200 text-slate-700 rounded-xl font-bold text-lg hover:bg-slate-50 hover:border-slate-300 transition-all duration-300">
-                            Learn Methodology
+                            Pelajari Metodologi
                         </a>
                     </div>
 
@@ -236,11 +236,11 @@ onMounted(() => {
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
                 <div class="flex items-center space-x-2">
                     <GlobeAltIcon class="w-5 h-5 text-indigo-500" />
-                    <span class="text-sm font-semibold text-slate-900">NeuroDemocracy Protocol</span>
+                    <span class="text-sm font-semibold text-slate-900">Democracy Protocol Policy</span>
                 </div>
                 
                 <div class="text-sm text-slate-500">
-                    &copy; {{ new Date().getFullYear() }} Research Initiative.
+                    &copy; {{ new Date().getFullYear() }} Inisiatif Riset DPP.
                 </div>
             </div>
         </footer>

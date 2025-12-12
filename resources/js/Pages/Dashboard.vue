@@ -18,20 +18,20 @@ const props = defineProps({
     recent_discussions: Array
 });
 
-// Helper untuk format tanggal akademik
+// Helper untuk format tanggal
 const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-GB', {
+    return new Date(dateString).toLocaleDateString('id-ID', {
         day: 'numeric',
         month: 'long',
         year: 'numeric'
     });
 };
 
-// Konfigurasi Chart yang lebih Clean & Modern
+// Konfigurasi Chart
 const chartData = {
-    labels: ['Governance Nodes', 'Indicators', 'Active Labs'],
+    labels: ['Node Pemerintahan', 'Indikator', 'Lab Aktif'],
     datasets: [{
-        label: 'System Metrics',
+        label: 'Metrik Sistem',
         data: [props.stats.nodes_count, props.stats.indicators_count, props.stats.discussions_count],
         backgroundColor: [
             'rgba(79, 70, 229, 0.1)', // Indigo
@@ -88,7 +88,7 @@ const chartOptions = {
 </script>
 
 <template>
-    <Head title="Research Dashboard" />
+    <Head title="Dashboard Riset" />
 
     <AuthenticatedLayout>
         <div class="fixed inset-0 z-0 pointer-events-none">
@@ -106,12 +106,12 @@ const chartOptions = {
                     </h2>
                     <p class="mt-1 text-sm text-slate-500 flex items-center gap-2">
                         <AcademicCapIcon class="w-4 h-4" />
-                        <span>Overview of research nodes and democratic indicators.</span>
+                        <span>Ikhtisar node riset dan indikator demokratis.</span>
                     </p>
                 </div>
                 <div class="flex items-center gap-3 text-sm font-medium text-slate-600 bg-white/50 px-4 py-2 rounded-lg border border-slate-200 backdrop-blur-sm">
                     <ClockIcon class="w-4 h-4 text-indigo-500" />
-                    {{ new Date().toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }}
+                    {{ new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }}
                 </div>
             </div>
         </template>
@@ -128,11 +128,11 @@ const chartOptions = {
                             <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                                 <GlobeAltIcon class="w-6 h-6 text-indigo-600" />
                             </div>
-                            <p class="text-sm font-medium text-slate-500">Total Nodes</p>
+                            <p class="text-sm font-medium text-slate-500">Total Node</p>
                             <h3 class="text-3xl font-bold text-slate-900 mt-1">{{ stats.nodes_count }}</h3>
                             <div class="mt-2 flex items-center text-xs font-medium text-emerald-600 bg-emerald-50 w-fit px-2 py-1 rounded-full">
                                 <ArrowTrendingUpIcon class="w-3 h-3 mr-1" />
-                                <span>Active</span>
+                                <span>Aktif</span>
                             </div>
                         </div>
                     </div>
@@ -145,10 +145,10 @@ const chartOptions = {
                             <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                                 <ChartBarIcon class="w-6 h-6 text-emerald-600" />
                             </div>
-                            <p class="text-sm font-medium text-slate-500">Governance Indicators</p>
+                            <p class="text-sm font-medium text-slate-500">Indikator Pemerintahan</p>
                             <h3 class="text-3xl font-bold text-slate-900 mt-1">{{ stats.indicators_count }}</h3>
                             <div class="mt-2 flex items-center text-xs font-medium text-slate-500">
-                                <span>Tracked metrics</span>
+                                <span>Metrik terlacak</span>
                             </div>
                         </div>
                     </div>
@@ -161,10 +161,10 @@ const chartOptions = {
                             <div class="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                                 <ChatBubbleLeftRightIcon class="w-6 h-6 text-amber-600" />
                             </div>
-                            <p class="text-sm font-medium text-slate-500">Civic Discussions</p>
+                            <p class="text-sm font-medium text-slate-500">Diskusi Sipil</p>
                             <h3 class="text-3xl font-bold text-slate-900 mt-1">{{ stats.discussions_count }}</h3>
                             <div class="mt-2 flex items-center text-xs font-medium text-amber-600 bg-amber-50 w-fit px-2 py-1 rounded-full">
-                                <span>High Engagement</span>
+                                <span>Keterlibatan Tinggi</span>
                             </div>
                         </div>
                     </div>
@@ -177,11 +177,11 @@ const chartOptions = {
                             <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                                 <BeakerIcon class="w-6 h-6 text-purple-600" />
                             </div>
-                            <p class="text-sm font-medium text-slate-500">Avg. Integrity Score</p>
+                            <p class="text-sm font-medium text-slate-500">Skor Integritas Rata-rata</p>
                             <h3 class="text-3xl font-bold text-slate-900 mt-1">{{ parseFloat(stats.avg_score).toFixed(1) }}</h3>
                             <div class="mt-2 flex items-center text-xs font-medium text-purple-600 bg-purple-50 w-fit px-2 py-1 rounded-full">
                                 <ArrowTrendingUpIcon class="w-3 h-3 mr-1" />
-                                <span>+2.5% vs Last Month</span>
+                                <span>+2.5% vs Bulan Lalu</span>
                             </div>
                         </div>
                     </div>
@@ -192,11 +192,11 @@ const chartOptions = {
                     <div class="lg:col-span-2 bg-white/70 backdrop-blur-xl border border-slate-200 rounded-2xl p-6 shadow-sm">
                         <div class="flex items-center justify-between mb-6">
                             <div>
-                                <h3 class="text-lg font-bold text-slate-900">Platform Analytics</h3>
-                                <p class="text-sm text-slate-500">Real-time data visualization</p>
+                                <h3 class="text-lg font-bold text-slate-900">Analitik Platform</h3>
+                                <p class="text-sm text-slate-500">Visualisasi data real-time</p>
                             </div>
                             <button class="text-xs font-semibold text-indigo-600 hover:bg-indigo-50 px-3 py-1.5 rounded-lg transition-colors border border-indigo-200">
-                                Download Report
+                                Unduh Laporan
                             </button>
                         </div>
                         <div class="h-80 w-full">
@@ -209,15 +209,15 @@ const chartOptions = {
                         <div class="absolute bottom-0 left-0 -ml-8 -mb-8 w-40 h-40 bg-indigo-500 opacity-20 rounded-full blur-2xl"></div>
                         
                         <div class="relative z-10">
-                            <h3 class="text-lg font-bold mb-1">Weekly Highlight</h3>
-                            <p class="text-indigo-200 text-sm mb-6">Latest system simulation analysis.</p>
+                            <h3 class="text-lg font-bold mb-1">Sorotan Mingguan</h3>
+                            <p class="text-indigo-200 text-sm mb-6">Analisis simulasi sistem terbaru.</p>
                             
                             <div class="space-y-4">
                                 <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10">
                                     <div class="flex justify-between items-start">
                                         <div>
-                                            <p class="text-xs text-indigo-200 uppercase tracking-wider font-semibold">Top Performing Node</p>
-                                            <p class="text-lg font-bold mt-1">Jakarta Governance Lab</p>
+                                            <p class="text-xs text-indigo-200 uppercase tracking-wider font-semibold">Node Berkinerja Terbaik</p>
+                                        <p class="text-lg font-bold mt-1">Lab Pemerintahan Jakarta</p>
                                         </div>
                                         <div class="bg-emerald-500/20 text-emerald-300 text-xs px-2 py-1 rounded font-bold">+12%</div>
                                     </div>
@@ -225,10 +225,10 @@ const chartOptions = {
                                 <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10">
                                     <div class="flex justify-between items-start">
                                         <div>
-                                            <p class="text-xs text-indigo-200 uppercase tracking-wider font-semibold">Active Participants</p>
-                                            <p class="text-lg font-bold mt-1">1,240 Researchers</p>
+                                            <p class="text-xs text-indigo-200 uppercase tracking-wider font-semibold">Partisipan Aktif</p>
+                                        <p class="text-lg font-bold mt-1">1.240 Peneliti</p>
                                         </div>
-                                        <div class="bg-indigo-500/20 text-indigo-300 text-xs px-2 py-1 rounded font-bold">New</div>
+                                        <div class="bg-indigo-500/20 text-indigo-300 text-xs px-2 py-1 rounded font-bold">Baru</div>
                                     </div>
                                 </div>
                             </div>
@@ -236,7 +236,7 @@ const chartOptions = {
                         
                         <div class="relative z-10 mt-6 pt-6 border-t border-white/10">
                             <button class="w-full py-2 bg-white text-indigo-900 font-bold rounded-lg hover:bg-indigo-50 transition-colors text-sm">
-                                View Full Analysis
+                                Lihat Analisis Lengkap
                             </button>
                         </div>
                     </div>
@@ -249,13 +249,13 @@ const chartOptions = {
                             <div class="p-2 bg-indigo-100 rounded-lg">
                                 <BeakerIcon class="w-5 h-5 text-indigo-600" />
                             </div>
-                            <h3 class="text-lg font-bold text-slate-900">Recent Simulations</h3>
+                            <h3 class="text-lg font-bold text-slate-900">Simulasi Terbaru</h3>
                         </div>
 
                         <div class="space-y-3">
                             <div v-if="recent_simulations.length === 0" class="text-center py-12 text-slate-400">
                                 <BeakerIcon class="w-12 h-12 mx-auto mb-2 opacity-20" />
-                                <p class="text-sm">No simulations recorded yet.</p>
+                                <p class="text-sm">Belum ada simulasi yang tercatat.</p>
                             </div>
 
                             <div 
@@ -270,7 +270,7 @@ const chartOptions = {
                                             {{ sim.node?.name || 'Unknown Node' }}
                                         </p>
                                         <p class="text-xs text-slate-500 mt-0.5">
-                                            Indicator: {{ sim.indicator }}
+                                            Indikator: {{ sim.indicator }}
                                         </p>
                                     </div>
                                 </div>
@@ -289,13 +289,13 @@ const chartOptions = {
                             <div class="p-2 bg-amber-100 rounded-lg">
                                 <ChatBubbleLeftRightIcon class="w-5 h-5 text-amber-600" />
                             </div>
-                            <h3 class="text-lg font-bold text-slate-900">Recent Discussions</h3>
+                            <h3 class="text-lg font-bold text-slate-900">Diskusi Terbaru</h3>
                         </div>
 
                         <div class="space-y-3">
                             <div v-if="recent_discussions.length === 0" class="text-center py-12 text-slate-400">
                                 <ChatBubbleLeftRightIcon class="w-12 h-12 mx-auto mb-2 opacity-20" />
-                                <p class="text-sm">No discussions started yet.</p>
+                                <p class="text-sm">Belum ada diskusi yang dimulai.</p>
                             </div>
 
                             <div 

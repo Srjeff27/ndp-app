@@ -41,13 +41,13 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <Head title="Log in" />
+        <Head title="Masuk" />
 
         <div class="p-8">
             <!-- Header -->
             <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold text-gray-900">Welcome Back</h2>
-                <p class="mt-2 text-sm text-gray-600">Sign in to your account to continue</p>
+                <h2 class="text-3xl font-bold text-gray-900">Selamat Datang Kembali</h2>
+                <p class="mt-2 text-sm text-gray-600">Masuk ke akun Anda untuk melanjutkan</p>
             </div>
 
             <!-- Status Message -->
@@ -58,7 +58,7 @@ const submit = () => {
             <form @submit.prevent="submit" class="space-y-6">
                 <!-- Email -->
                 <div>
-                    <InputLabel for="email" value="Email Address" class="mb-2" />
+                    <InputLabel for="email" value="Alamat Email" class="mb-2" />
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <EnvelopeIcon class="h-5 w-5 text-gray-400" />
@@ -71,7 +71,7 @@ const submit = () => {
                             required
                             autofocus
                             autocomplete="username"
-                            placeholder="you@example.com"
+                            placeholder="anda@contoh.com"
                         />
                     </div>
                     <InputError class="mt-2" :message="form.errors.email" />
@@ -79,7 +79,7 @@ const submit = () => {
 
                 <!-- Password -->
                 <div>
-                    <InputLabel for="password" value="Password" class="mb-2" />
+                    <InputLabel for="password" value="Kata Sandi" class="mb-2" />
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <LockClosedIcon class="h-5 w-5 text-gray-400" />
@@ -109,7 +109,7 @@ const submit = () => {
                 <div class="flex items-center justify-between">
                     <label class="flex items-center">
                         <Checkbox name="remember" v-model:checked="form.remember" />
-                        <span class="ms-2 text-sm text-gray-600">Remember me</span>
+                        <span class="ms-2 text-sm text-gray-600">Ingat saya</span>
                     </label>
 
                     <Link
@@ -117,7 +117,7 @@ const submit = () => {
                         :href="route('password.request')"
                         class="text-sm font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
                     >
-                        Forgot password?
+                        Lupa kata sandi?
                     </Link>
                 </div>
 
@@ -128,7 +128,7 @@ const submit = () => {
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing"
                     >
-                        <span>Sign In</span>
+                        <span>Masuk</span>
                         <ArrowRightIcon class="ml-2 w-4 h-4" />
                     </PrimaryButton>
                 </div>
@@ -136,12 +136,12 @@ const submit = () => {
                 <!-- Register Link -->
                 <div class="text-center pt-4 border-t border-gray-200">
                     <p class="text-sm text-gray-600">
-                        Don't have an account?
+                        Belum punya akun?
                         <Link
                             :href="route('register')"
                             class="font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
                         >
-                            Sign up
+                            Daftar
                         </Link>
                     </p>
                 </div>
