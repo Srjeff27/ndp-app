@@ -22,9 +22,9 @@ const showingNavigationDropdown = ref(false);
 const navigation = [
     { name: 'Dashboard', route: 'dashboard', icon: Squares2X2Icon },
     { name: 'Node Pemerintahan', route: 'nodes.index', icon: GlobeAltIcon },
-    { name: 'Atlas Pemerintahan', route: 'atlas.index', icon: ChartBarIcon },
-    { name: 'Lab Sipil', route: 'labs.index', icon: ChatBubbleLeftRightIcon },
-    { name: 'Mesin Simulasi', route: 'simulation.index', icon: BeakerIcon }
+    { name: 'Peta Akuntabilitas', route: 'atlas.index', icon: ChartBarIcon },
+    { name: 'Forum Masyarakat', route: 'labs.index', icon: ChatBubbleLeftRightIcon },
+    { name: 'Simulasi AI', route: 'simulation.index', icon: BeakerIcon }
 ];
 
 const page = usePage();

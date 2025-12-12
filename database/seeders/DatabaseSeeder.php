@@ -2,13 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use App\Models\Node;
+use App\Models\AiRecommendation;
 use App\Models\AtlasEntry;
+use App\Models\AuditLog;
 use App\Models\Lab;
 use App\Models\LabPost;
+use App\Models\Node;
+use App\Models\Policy;
+use App\Models\PolicyHistory;
+use App\Models\PolicyReview;
 use App\Models\SimulationResult;
-use App\Models\AuditLog;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -108,6 +112,167 @@ class DatabaseSeeder extends Seeder
             'lat' => -5.1477,
             'lng' => 119.4327,
             'user_id' => $nodeAdmin2->id,
+        ]);
+
+        // Create policies (Kebijakan Pemerintah)
+        $policy1 = Policy::create([
+            'node_id' => $node1->id,
+            'title' => 'Pembangunan MRT Jakarta Fase 3',
+            'description' => 'Pembangunan jalur MRT dari Lebak Bulus hingga Kota dengan total panjang 25 km untuk mengurangi kemacetan di Jakarta.',
+            'category' => 'Infrastruktur',
+            'budget' => 15000000000000, // 15 Triliun
+            'implementation_date' => '2025-06-01',
+            'status' => 'proposed',
+            'budget_breakdown' => [
+                'konstruksi' => 10000000000000,
+                'pengadaan_kereta' => 3000000000000,
+                'operasional' => 2000000000000,
+            ],
+        ]);
+
+        $policy2 = Policy::create([
+            'node_id' => $node2->id,
+            'title' => 'Program Beasiswa Pendidikan Gratis',
+            'description' => 'Memberikan beasiswa penuh untuk 10,000 siswa berprestasi dari keluarga kurang mampu untuk jenjang SMA dan Perguruan Tinggi.',
+            'category' => 'Pendidikan',
+            'budget' => 500000000000, // 500 Miliar
+            'implementation_date' => '2025-07-01',
+            'status' => 'proposed',
+            'budget_breakdown' => [
+                'biaya_pendidikan' => 300000000000,
+                'biaya_hidup' => 150000000000,
+                'administrasi' => 50000000000,
+            ],
+        ]);
+
+        $policy3 = Policy::create([
+            'node_id' => $node3->id,
+            'title' => 'Digitalisasi Layanan Publik',
+            'description' => 'Mengintegrasikan semua layanan pemerintah dalam satu aplikasi mobile untuk meningkatkan efisiensi dan transparansi.',
+            'category' => 'Teknologi',
+            'budget' => 200000000000, // 200 Miliar
+            'implementation_date' => '2025-03-01',
+            'status' => 'active',
+            'budget_breakdown' => [
+                'pengembangan_aplikasi' => 100000000000,
+                'infrastruktur_server' => 70000000000,
+                'pelatihan_sdm' => 30000000000,
+            ],
+        ]);
+
+        $policy4 = Policy::create([
+            'node_id' => $node4->id,
+            'title' => 'Pembangunan Rumah Sakit Rujukan',
+            'description' => 'Membangun 5 rumah sakit rujukan baru di daerah terpencil untuk meningkatkan akses layanan kesehatan.',
+            'category' => 'Kesehatan',
+            'budget' => 2000000000000, // 2 Triliun
+            'implementation_date' => '2025-09-01',
+            'status' => 'proposed',
+            'budget_breakdown' => [
+                'pembangunan_gedung' => 1200000000000,
+                'peralatan_medis' => 600000000000,
+                'rekrutmen_tenaga_medis' => 200000000000,
+            ],
+        ]);
+
+        $policy5 = Policy::create([
+            'node_id' => $node5->id,
+            'title' => 'Kenaikan Pajak Kendaraan Bermotor',
+            'description' => 'Menaikkan pajak kendaraan bermotor sebesar 20% untuk mengurangi polusi udara dan kemacetan.',
+            'category' => 'Lingkungan',
+            'budget' => 0, // Tidak ada anggaran (kebijakan regulasi)
+            'implementation_date' => '2025-01-01',
+            'status' => 'proposed',
+        ]);
+
+        // Create policy reviews (Penilaian Masyarakat)
+
+        // Policy 1 (MRT) - Skor tinggi (disetujui)
+        PolicyReview::create(['policy_id' => $policy1->id, 'user_id' => $student1->id, 'score' => 95, 'comment' => 'Sangat diperlukan untuk mengatasi kemacetan Jakarta!', 'sentiment' => 'positive']);
+        PolicyReview::create(['policy_id' => $policy1->id, 'user_id' => $student2->id, 'score' => 92, 'comment' => 'Bagus, tapi perlu perhatian dampak lingkungan saat konstruksi.', 'sentiment' => 'positive']);
+        PolicyReview::create(['policy_id' => $policy1->id, 'user_id' => $student3->id, 'score' => 88, 'comment' => 'Setuju, asalkan tepat waktu dan tidak ada korupsi.', 'sentiment' => 'positive']);
+        PolicyReview::create(['policy_id' => $policy1->id, 'user_id' => $nodeAdmin1->id, 'score' => 94, 'comment' => 'Investasi jangka panjang yang sangat baik.', 'sentiment' => 'positive']);
+        PolicyReview::create(['policy_id' => $policy1->id, 'user_id' => $nodeAdmin2->id, 'score' => 96, 'comment' => 'Akan meningkatkan produktivitas ekonomi Jakarta.', 'sentiment' => 'positive']);
+
+        // Policy 2 (Beasiswa) - Skor tinggi (disetujui)
+        PolicyReview::create(['policy_id' => $policy2->id, 'user_id' => $student1->id, 'score' => 98, 'comment' => 'Sangat membantu! Saya mendukung penuh kebijakan ini.', 'sentiment' => 'positive']);
+        PolicyReview::create(['policy_id' => $policy2->id, 'user_id' => $student2->id, 'score' => 97, 'comment' => 'Ini akan membuka akses pendidikan untuk banyak anak Indonesia.', 'sentiment' => 'positive']);
+        PolicyReview::create(['policy_id' => $policy2->id, 'user_id' => $student3->id, 'score' => 95, 'comment' => 'Luar biasa! Harap seleksi benar-benar transparan.', 'sentiment' => 'positive']);
+        PolicyReview::create(['policy_id' => $policy2->id, 'user_id' => $globalAdmin->id, 'score' => 99, 'comment' => 'Investasi terbaik untuk masa depan bangsa.', 'sentiment' => 'positive']);
+
+        // Policy 3 (Digitalisasi) - Skor tinggi (disetujui)
+        PolicyReview::create(['policy_id' => $policy3->id, 'user_id' => $student1->id, 'score' => 91, 'comment' => 'Sudah waktunya! Tapi pastikan keamanan data terjaga.', 'sentiment' => 'positive']);
+        PolicyReview::create(['policy_id' => $policy3->id, 'user_id' => $student2->id, 'score' => 93, 'comment' => 'Akan sangat memudahkan urusan administrasi.', 'sentiment' => 'positive']);
+        PolicyReview::create(['policy_id' => $policy3->id, 'user_id' => $nodeAdmin1->id, 'score' => 92, 'comment' => 'Perlu pelatihan SDM yang memadai.', 'sentiment' => 'positive']);
+
+        // Policy 4 (Rumah Sakit) - Skor tinggi (disetujui)
+        PolicyReview::create(['policy_id' => $policy4->id, 'user_id' => $student1->id, 'score' => 94, 'comment' => 'Sangat penting untuk pemerataan akses kesehatan.', 'sentiment' => 'positive']);
+        PolicyReview::create(['policy_id' => $policy4->id, 'user_id' => $student2->id, 'score' => 96, 'comment' => 'Daerah terpencil sangat membutuhkan ini!', 'sentiment' => 'positive']);
+        PolicyReview::create(['policy_id' => $policy4->id, 'user_id' => $globalAdmin->id, 'score' => 95, 'comment' => 'Prioritas yang tepat untuk kesehatan masyarakat.', 'sentiment' => 'positive']);
+
+        // Policy 5 (Pajak Kendaraan) - Skor rendah (ditolak)
+        PolicyReview::create(['policy_id' => $policy5->id, 'user_id' => $student1->id, 'score' => 45, 'comment' => 'Terlalu memberatkan rakyat kecil. Tidak setuju!', 'sentiment' => 'negative']);
+        PolicyReview::create(['policy_id' => $policy5->id, 'user_id' => $student2->id, 'score' => 35, 'comment' => 'Ini akan menambah beban ekonomi masyarakat.', 'sentiment' => 'negative']);
+        PolicyReview::create(['policy_id' => $policy5->id, 'user_id' => $student3->id, 'score' => 50, 'comment' => 'Ada cara lain yang lebih baik untuk mengurangi polusi.', 'sentiment' => 'neutral']);
+        PolicyReview::create(['policy_id' => $policy5->id, 'user_id' => $nodeAdmin1->id, 'score' => 40, 'comment' => 'Perlu dikaji ulang dampak sosial ekonominya.', 'sentiment' => 'negative']);
+        PolicyReview::create(['policy_id' => $policy5->id, 'user_id' => $nodeAdmin2->id, 'score' => 55, 'comment' => 'Tujuannya baik tapi implementasinya perlu diperbaiki.', 'sentiment' => 'neutral']);
+
+        // Generate AI Recommendations
+        $this->generateAiRecommendation($policy1);
+        $this->generateAiRecommendation($policy2);
+        $this->generateAiRecommendation($policy3);
+        $this->generateAiRecommendation($policy4);
+        $this->generateAiRecommendation($policy5);
+
+        // Create policy history (Riwayat Kebijakan 5 Tahun)
+        PolicyHistory::create([
+            'node_id' => $node1->id,
+            'title' => 'Pembangunan MRT Jakarta Fase 1',
+            'description' => 'Pembangunan jalur MRT pertama di Indonesia dari Lebak Bulus ke Bundaran HI.',
+            'year' => 2019,
+            'budget' => 16000000000000,
+            'outcome' => 'successful',
+            'impact_summary' => 'Berhasil mengurangi waktu tempuh 30% dan meningkatkan mobilitas warga Jakarta.',
+        ]);
+
+        PolicyHistory::create([
+            'node_id' => $node2->id,
+            'title' => 'Program Kartu Indonesia Pintar',
+            'description' => 'Bantuan pendidikan untuk siswa dari keluarga kurang mampu.',
+            'year' => 2020,
+            'budget' => 8000000000000,
+            'outcome' => 'successful',
+            'impact_summary' => 'Meningkatkan angka partisipasi sekolah sebesar 15%.',
+        ]);
+
+        PolicyHistory::create([
+            'node_id' => $node3->id,
+            'title' => 'Implementasi e-Government',
+            'description' => 'Digitalisasi layanan administrasi pemerintahan.',
+            'year' => 2021,
+            'budget' => 150000000000,
+            'outcome' => 'partially_successful',
+            'impact_summary' => 'Berhasil di kota besar, tapi masih terkendala di daerah.',
+        ]);
+
+        PolicyHistory::create([
+            'node_id' => $node4->id,
+            'title' => 'Program BPJS Kesehatan Universal',
+            'description' => 'Jaminan kesehatan untuk seluruh rakyat Indonesia.',
+            'year' => 2022,
+            'budget' => 50000000000000,
+            'outcome' => 'partially_successful',
+            'impact_summary' => 'Cakupan luas tapi masih ada masalah kualitas layanan.',
+        ]);
+
+        PolicyHistory::create([
+            'node_id' => $node5->id,
+            'title' => 'Pembatasan Kendaraan Ganjil-Genap',
+            'description' => 'Kebijakan pembatasan kendaraan berdasarkan plat nomor.',
+            'year' => 2023,
+            'budget' => 0,
+            'outcome' => 'failed',
+            'impact_summary' => 'Tidak efektif mengurangi kemacetan, banyak pelanggaran.',
         ]);
 
         // Create atlas entries (governance indicators)
@@ -305,6 +470,50 @@ class DatabaseSeeder extends Seeder
             'table_name' => 'atlas_entries',
             'before' => json_encode(['score' => 70]),
             'after' => json_encode(['score' => 75]),
+        ]);
+    }
+
+    private function generateAiRecommendation(Policy $policy): void
+    {
+        $reviews = $policy->reviews;
+        $avgScore = $reviews->avg('score');
+        $totalReviews = $reviews->count();
+
+        // Analisis sentimen
+        $sentimentBreakdown = [
+            'positive' => $reviews->where('sentiment', 'positive')->count(),
+            'neutral' => $reviews->where('sentiment', 'neutral')->count(),
+            'negative' => $reviews->where('sentiment', 'negative')->count(),
+        ];
+
+        // Kritik yang sering muncul
+        $commonCriticisms = $reviews
+            ->whereNotNull('comment')
+            ->pluck('comment')
+            ->take(5)
+            ->toArray();
+
+        // Rekomendasi
+        $recommendation = $avgScore >= 91 ? 'approve' : ($avgScore >= 50 ? 'revise' : 'reject');
+
+        // Generate AI analysis
+        if ($avgScore >= 91) {
+            $aiAnalysis = "Kebijakan ini mendapat dukungan kuat dari masyarakat dengan skor rata-rata {$avgScore}% dari {$totalReviews} penilaian. Mayoritas responden memberikan sentimen positif. Rekomendasi: LANJUTKAN implementasi kebijakan ini.";
+        } elseif ($avgScore >= 50) {
+            $aiAnalysis = "Kebijakan ini mendapat respon campuran dengan skor rata-rata {$avgScore}% dari {$totalReviews} penilaian. Diperlukan revisi untuk meningkatkan dukungan masyarakat. Rekomendasi: REVISI kebijakan berdasarkan masukan masyarakat.";
+        } else {
+            $aiAnalysis = "Kebijakan ini mendapat penolakan dari masyarakat dengan skor rata-rata {$avgScore}% dari {$totalReviews} penilaian. Mayoritas responden memberikan sentimen negatif. Rekomendasi: TINJAU ULANG atau BATALKAN kebijakan ini.";
+        }
+
+        AiRecommendation::create([
+            'policy_id' => $policy->id,
+            'average_score' => $avgScore,
+            'total_reviews' => $totalReviews,
+            'recommendation' => $recommendation,
+            'ai_analysis' => $aiAnalysis,
+            'sentiment_breakdown' => $sentimentBreakdown,
+            'common_criticisms' => $commonCriticisms,
+            'analyzed_at' => now(),
         ]);
     }
 }
