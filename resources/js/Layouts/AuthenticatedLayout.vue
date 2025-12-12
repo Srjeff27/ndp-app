@@ -14,7 +14,8 @@ import {
     XMarkIcon,
     UserCircleIcon,
     Cog6ToothIcon,
-    ArrowRightOnRectangleIcon
+    ArrowRightOnRectangleIcon,
+    ScaleIcon
 } from '@heroicons/vue/24/outline';
 
 const showingNavigationDropdown = ref(false);
@@ -32,7 +33,7 @@ const page = usePage();
 
 <template>
     <div>
-        <div class="min-h-screen bg-slate-50">
+            <div class="min-h-screen bg-gradient-to-br from-maroon-50 via-white to-gold-50">
             
             <!-- Desktop Sidebar -->
             <aside class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
@@ -54,8 +55,8 @@ const page = usePage();
                                             :href="route(item.route)"
                                             :class="[
                                                 route().current(item.route + '*')
-                                                    ? 'bg-indigo-50 text-indigo-600'
-                                                    : 'text-slate-700 hover:bg-slate-50',
+                                                    ? 'bg-maroon-50 text-maroon-700'
+                                                    : 'text-slate-700 hover:bg-maroon-50/50',
                                                 'group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-colors'
                                             ]"
                                         >
@@ -63,8 +64,8 @@ const page = usePage();
                                                 :is="item.icon"
                                                 :class="[
                                                     route().current(item.route + '*')
-                                                        ? 'text-indigo-600'
-                                                        : 'text-slate-400 group-hover:text-indigo-600',
+                                                        ? 'text-maroon-700'
+                                                        : 'text-slate-400 group-hover:text-maroon-700',
                                                     'h-6 w-6 shrink-0'
                                                 ]"
                                             />
@@ -79,7 +80,7 @@ const page = usePage();
                                 <div class="border-t border-slate-200 pt-4 space-y-2">
                                     <!-- User Info -->
                                     <div class="flex items-center gap-x-3 px-3 py-2">
-                                        <div class="h-10 w-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold">
+                                        <div class="h-10 w-10 rounded-full bg-gradient-to-br from-maroon-600 to-maroon-800 flex items-center justify-center text-white font-bold">
                                             {{ $page.props.auth.user.name.charAt(0).toUpperCase() }}
                                         </div>
                                         <div class="flex-1 min-w-0">
@@ -93,7 +94,7 @@ const page = usePage();
                                         :href="route('profile.edit')"
                                         class="group flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
                                     >
-                                        <UserCircleIcon class="h-5 w-5 text-slate-400 group-hover:text-indigo-600" />
+                                        <UserCircleIcon class="h-5 w-5 text-slate-400 group-hover:text-maroon-700" />
                                         <span>Pengaturan Profil</span>
                                     </Link>
                                     
@@ -125,7 +126,7 @@ const page = usePage();
                 <Dropdown align="right" width="48">
                     <template #trigger>
                         <button class="flex items-center space-x-2 rounded-lg px-2 py-1.5 hover:bg-slate-50 transition-colors">
-                            <div class="h-8 w-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm">
+                            <div class="h-8 w-8 rounded-full bg-gradient-to-br from-maroon-600 to-maroon-800 flex items-center justify-center text-white font-bold text-sm">
                                 {{ $page.props.auth.user.name.charAt(0).toUpperCase() }}
                             </div>
                         </button>
@@ -172,15 +173,15 @@ const page = usePage();
                         :href="route(item.route)"
                         :class="[
                             route().current(item.route + '*')
-                                ? 'text-indigo-600'
+                                ? 'text-maroon-700'
                                 : 'text-slate-500',
-                            'flex flex-col items-center justify-center space-y-1 transition-colors hover:text-indigo-600'
+                            'flex flex-col items-center justify-center space-y-1 transition-colors hover:text-maroon-700'
                         ]"
                     >
                         <component
                             :is="item.icon"
                             :class="[
-                                route().current(item.route + '*') ? 'text-indigo-600' : '',
+                                route().current(item.route + '*') ? 'text-maroon-700' : '',
                                 'w-6 h-6'
                             ]"
                         />

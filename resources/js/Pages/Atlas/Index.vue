@@ -11,6 +11,7 @@ import {
     CheckCircleIcon,
     XCircleIcon,
     ClockIcon,
+    ScaleIcon,
 } from '@heroicons/vue/24/outline';
 
 const props = defineProps({
@@ -70,19 +71,19 @@ const getCategoryIcon = (category) => {
 
     <AuthenticatedLayout>
         <div class="fixed inset-0 z-0 pointer-events-none">
-            <div class="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-maroon-50 via-white to-gold-50"></div>
             <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
         </div>
 
         <template #header>
             <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div class="flex items-center space-x-4">
-                    <div class="p-3 bg-white rounded-xl shadow-sm border border-slate-200">
-                        <ChartBarIcon class="w-8 h-8 text-indigo-600" />
+                    <div class="p-3 bg-gradient-to-br from-maroon-100 to-maroon-200 rounded-xl border border-maroon-300">
+                        <ScaleIcon class="w-8 h-8 text-maroon-700" />
                     </div>
                     <div>
-                        <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Peta Akuntabilitas Kebijakan</h2>
-                        <p class="text-sm text-slate-500 mt-1">Transparansi Kebijakan Pemerintah Berbagai Daerah</p>
+                        <h2 class="text-2xl font-bold text-maroon-900 tracking-tight">Peta Akuntabilitas Kebijakan</h2>
+                        <p class="text-sm text-maroon-600 mt-1">⚖️ Transparansi & Keadilan Kebijakan Pemerintah</p>
                     </div>
                 </div>
                 
@@ -121,7 +122,7 @@ const getCategoryIcon = (category) => {
                                 v-model="searchQuery"
                                 type="text"
                                 placeholder="Cari judul atau deskripsi..."
-                                class="w-full rounded-lg border-slate-200 bg-slate-50 focus:border-indigo-500 focus:ring-indigo-500 text-sm"
+                                class="w-full rounded-lg border-maroon-200 bg-maroon-50/50 focus:border-maroon-500 focus:ring-maroon-500 text-sm"
                             />
                         </div>
                         
@@ -130,7 +131,7 @@ const getCategoryIcon = (category) => {
                             <label class="block text-xs font-medium text-slate-600 mb-2">Kategori</label>
                             <select 
                                 v-model="selectedCategory"
-                                class="w-full rounded-lg border-slate-200 bg-slate-50 focus:border-indigo-500 focus:ring-indigo-500 text-sm"
+                                class="w-full rounded-lg border-maroon-200 bg-maroon-50/50 focus:border-maroon-500 focus:ring-maroon-500 text-sm"
                             >
                                 <option value="all">Semua Kategori</option>
                                 <option v-for="cat in categories.filter(c => c !== 'all')" :key="cat" :value="cat">
@@ -144,7 +145,7 @@ const getCategoryIcon = (category) => {
                             <label class="block text-xs font-medium text-slate-600 mb-2">Status</label>
                             <select 
                                 v-model="selectedStatus"
-                                class="w-full rounded-lg border-slate-200 bg-slate-50 focus:border-indigo-500 focus:ring-indigo-500 text-sm"
+                                class="w-full rounded-lg border-maroon-200 bg-maroon-50/50 focus:border-maroon-500 focus:ring-maroon-500 text-sm"
                             >
                                 <option value="all">Semua Status</option>
                                 <option value="proposed">Diusulkan</option>
@@ -164,8 +165,8 @@ const getCategoryIcon = (category) => {
                                 <p class="text-sm font-medium text-slate-500">Total Kebijakan</p>
                                 <h3 class="text-3xl font-bold text-slate-900 mt-1">{{ policies.length }}</h3>
                             </div>
-                            <div class="p-3 bg-indigo-100 rounded-xl">
-                                <ChartBarIcon class="w-8 h-8 text-indigo-600" />
+                            <div class="p-3 bg-maroon-100 rounded-xl">
+                                <ScaleIcon class="w-8 h-8 text-maroon-700" />
                             </div>
                         </div>
                     </div>
@@ -219,7 +220,7 @@ const getCategoryIcon = (category) => {
                             <div class="flex items-start justify-between mb-4">
                                 <div class="flex-1">
                                     <div class="flex items-center space-x-3 mb-2">
-                                        <h3 class="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                                        <h3 class="text-xl font-bold text-slate-900 group-hover:text-maroon-700 transition-colors">
                                             {{ policy.title }}
                                         </h3>
                                         <span 
@@ -277,7 +278,7 @@ const getCategoryIcon = (category) => {
                             >
                                 <div class="flex items-start space-x-3">
                                     <div class="flex-shrink-0">
-                                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
+                                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-maroon-600 to-maroon-800 flex items-center justify-center">
                                             <span class="text-white text-xs font-bold">AI</span>
                                         </div>
                                     </div>

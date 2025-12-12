@@ -9,6 +9,7 @@ import {
     CheckCircleIcon,
     XCircleIcon,
     SparklesIcon,
+    ScaleIcon,
 } from '@heroicons/vue/24/outline';
 
 const props = defineProps({
@@ -59,14 +60,14 @@ const getScoreGradient = (score) => {
 
     <AuthenticatedLayout>
         <div class="fixed inset-0 z-0 pointer-events-none">
-            <div class="absolute inset-0 bg-gradient-to-br from-slate-50 via-purple-50 to-pink-50"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-maroon-50 via-white to-gold-50"></div>
         </div>
 
         <template #header>
             <div class="relative z-10">
                 <div class="flex items-center space-x-3 mb-2">
-                    <ChatBubbleLeftRightIcon class="w-6 h-6 text-purple-600" />
-                    <h2 class="text-2xl font-bold text-slate-900">Detail Kebijakan</h2>
+                    <ScaleIcon class="w-6 h-6 text-maroon-700" />
+                    <h2 class="text-2xl font-bold text-maroon-900">⚖️ Detail Kebijakan</h2>
                 </div>
             </div>
         </template>
@@ -124,7 +125,7 @@ const getScoreGradient = (score) => {
                 <!-- AI Recommendation -->
                 <div 
                     v-if="policy.recommendation"
-                    class="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl shadow-xl p-6 text-white"
+                    class="bg-gradient-to-r from-maroon-700 to-maroon-900 rounded-2xl shadow-xl p-6 text-white"
                 >
                     <div class="flex items-start space-x-4">
                         <div class="flex-shrink-0">
@@ -224,7 +225,7 @@ const getScoreGradient = (score) => {
                             <button
                                 type="submit"
                                 :disabled="form.processing"
-                                class="px-8 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold rounded-xl shadow-lg transition-all disabled:opacity-50"
+                                class="px-8 py-3 bg-gradient-to-r from-maroon-700 to-maroon-800 hover:from-maroon-600 hover:to-maroon-700 text-white font-bold rounded-xl shadow-lg transition-all disabled:opacity-50"
                             >
                                 {{ policy.user_has_reviewed ? 'Update Penilaian' : 'Kirim Penilaian' }}
                             </button>
@@ -233,10 +234,10 @@ const getScoreGradient = (score) => {
                 </div>
 
                 <!-- User's Current Review -->
-                <div v-else class="bg-purple-50 border-2 border-purple-200 rounded-2xl p-6">
+                <div v-else class="bg-maroon-50 border-2 border-maroon-200 rounded-2xl p-6">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-3">
-                            <CheckCircleIcon class="w-8 h-8 text-purple-600" />
+                            <CheckCircleIcon class="w-8 h-8 text-maroon-700" />
                             <div>
                                 <h3 class="font-bold text-slate-900">Penilaian Anda: {{ policy.user_review.score }}%</h3>
                                 <p class="text-sm text-slate-600">{{ policy.user_review.comment || 'Tidak ada komentar' }}</p>
@@ -244,7 +245,7 @@ const getScoreGradient = (score) => {
                         </div>
                         <button
                             @click="showReviewForm = true"
-                            class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors"
+                            class="px-4 py-2 bg-maroon-700 hover:bg-maroon-800 text-white font-semibold rounded-lg transition-colors"
                         >
                             Edit Penilaian
                         </button>

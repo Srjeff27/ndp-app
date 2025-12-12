@@ -10,7 +10,8 @@ import {
     BuildingLibraryIcon,
     XMarkIcon,
     SignalIcon,
-    ArrowTopRightOnSquareIcon
+    ArrowTopRightOnSquareIcon,
+    ScaleIcon
 } from '@heroicons/vue/24/outline';
 
 const props = defineProps({
@@ -46,26 +47,26 @@ const submit = () => {
 
     <AuthenticatedLayout>
         <div class="fixed inset-0 z-0 pointer-events-none">
-            <div class="absolute inset-0 bg-slate-50"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-maroon-50 via-white to-gold-50"></div>
             <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[100px]"></div>
-            <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[100px]"></div>
+            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-maroon-500/10 rounded-full blur-[100px]"></div>
+            <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gold-500/10 rounded-full blur-[100px]"></div>
         </div>
 
         <template #header>
             <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div class="flex items-center space-x-4">
-                    <div class="p-3 bg-white rounded-xl shadow-sm border border-slate-200">
-                        <GlobeAltIcon class="w-8 h-8 text-indigo-600" />
+                    <div class="p-3 bg-gradient-to-br from-maroon-100 to-maroon-200 rounded-xl border border-maroon-300">
+                        <ScaleIcon class="w-8 h-8 text-maroon-700" />
                     </div>
                     <div>
-                        <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Node Pemerintahan</h2>
-                        <div class="flex items-center space-x-2 text-sm text-slate-500">
+                        <h2 class="text-2xl font-bold text-maroon-900 tracking-tight">⚖️ Node Pemerintahan</h2>
+                        <div class="flex items-center space-x-2 text-sm text-maroon-600">
                             <span class="relative flex h-2 w-2">
                                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                                 <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                             </span>
-                            <span>Pelacak Jaringan Institusi Global</span>
+                            <span>Pelacak Jaringan Institusi Pemerintah</span>
                         </div>
                     </div>
                 </div>
@@ -73,7 +74,7 @@ const submit = () => {
                 <button
                     v-if="canManageNodes"
                     @click="showForm = !showForm"
-                    class="group inline-flex items-center justify-center px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-indigo-500/30 transition-all duration-300"
+                    class="group inline-flex items-center justify-center px-5 py-2.5 bg-maroon-700 hover:bg-maroon-800 text-white font-semibold rounded-lg shadow-lg hover:shadow-maroon-500/30 transition-all duration-300"
                 >
                     <component :is="showForm ? XMarkIcon : PlusIcon" class="w-5 h-5 mr-2 transition-transform group-hover:rotate-90" />
                     {{ showForm ? 'Batal' : 'Daftarkan Node' }}

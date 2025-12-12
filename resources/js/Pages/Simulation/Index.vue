@@ -12,7 +12,8 @@ import {
     AdjustmentsHorizontalIcon,
     PlayIcon,
     ArrowPathIcon,
-    CalculatorIcon
+    CalculatorIcon,
+    ScaleIcon
 } from '@heroicons/vue/24/outline';
 
 const props = defineProps({
@@ -30,7 +31,8 @@ const form = useForm({
 });
 
 const selectedNode = computed(() => {
-    return props.nodes.find(n => n.id === form.node_id);
+    if (!form.node_id) return null;
+    return props.nodes.find(n => n.id === parseInt(form.node_id));
 });
 
 const availableIndicators = computed(() => {
@@ -103,19 +105,19 @@ const chartOptions = {
 
     <AuthenticatedLayout>
         <div class="fixed inset-0 z-0 pointer-events-none">
-            <div class="absolute inset-0 bg-slate-50"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-maroon-50 via-white to-gold-50"></div>
             <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-            <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-rose-500/5 rounded-full blur-[100px]"></div>
+            <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-maroon-500/5 rounded-full blur-[100px]"></div>
         </div>
 
         <template #header>
             <div class="relative z-10 flex items-center space-x-4">
-                <div class="p-3 bg-white rounded-xl shadow-sm border border-slate-200">
-                    <BeakerIcon class="w-8 h-8 text-rose-500" />
+                <div class="p-3 bg-gradient-to-br from-maroon-100 to-maroon-200 rounded-xl border border-maroon-300">
+                    <ScaleIcon class="w-8 h-8 text-maroon-700" />
                 </div>
                 <div>
-                    <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Simulation Engine</h2>
-                    <p class="text-sm text-slate-500">Predictive modeling for governance impact analysis.</p>
+                    <h2 class="text-2xl font-bold text-maroon-900 tracking-tight">⚖️ Simulasi AI</h2>
+                    <p class="text-sm text-maroon-600">Analisis dampak kebijakan berbasis kecerdasan buatan.</p>
                 </div>
             </div>
         </template>
@@ -129,8 +131,8 @@ const chartOptions = {
                         <div class="bg-white/80 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-xl overflow-hidden">
                             <div class="px-6 py-4 bg-slate-50/50 border-b border-slate-100 flex items-center justify-between">
                                 <h3 class="font-bold text-slate-800 flex items-center text-sm uppercase tracking-wider">
-                                    <AdjustmentsHorizontalIcon class="w-4 h-4 mr-2 text-rose-500" />
-                                    Parameters
+                                    <AdjustmentsHorizontalIcon class="w-4 h-4 mr-2 text-maroon-600" />
+                                    Parameter
                                 </h3>
                                 <div class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></div>
                             </div>
@@ -141,7 +143,7 @@ const chartOptions = {
                                     <div class="relative">
                                         <select 
                                             v-model="form.node_id" 
-                                            class="block w-full pl-10 pr-4 py-3 rounded-xl border-slate-200 bg-slate-50 focus:border-rose-500 focus:ring-rose-500 text-sm transition-shadow shadow-sm appearance-none"
+                                            class="block w-full pl-10 pr-4 py-3 rounded-xl border-maroon-200 bg-maroon-50/50 focus:border-maroon-500 focus:ring-maroon-500 text-sm transition-shadow shadow-sm appearance-none"
                                             required
                                         >
                                             <option value="" disabled>Select Institution...</option>
@@ -157,7 +159,7 @@ const chartOptions = {
                                         <select 
                                             v-model="form.indicator" 
                                             @change="onIndicatorChange"
-                                            class="block w-full pl-10 pr-4 py-3 rounded-xl border-slate-200 bg-slate-50 focus:border-rose-500 focus:ring-rose-500 text-sm transition-shadow shadow-sm appearance-none disabled:opacity-50"
+                                            class="block w-full pl-10 pr-4 py-3 rounded-xl border-maroon-200 bg-maroon-50/50 focus:border-maroon-500 focus:ring-maroon-500 text-sm transition-shadow shadow-sm appearance-none disabled:opacity-50"
                                             :disabled="!selectedNode"
                                             required
                                         >
@@ -215,11 +217,11 @@ const chartOptions = {
                                 <button 
                                     type="submit" 
                                     :disabled="!form.indicator || form.processing"
-                                    class="w-full flex items-center justify-center py-3.5 px-4 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white font-bold rounded-xl shadow-lg shadow-rose-500/30 transition-all transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
+                                    class="w-full flex items-center justify-center py-3.5 px-4 bg-gradient-to-r from-maroon-700 to-maroon-800 hover:from-maroon-600 hover:to-maroon-700 text-white font-bold rounded-xl shadow-lg shadow-maroon-500/30 transition-all transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
                                 >
                                     <ArrowPathIcon v-if="form.processing" class="w-5 h-5 mr-2 animate-spin" />
                                     <PlayIcon v-else class="w-5 h-5 mr-2" />
-                                    Run Simulation
+                                    Jalankan Simulasi
                                 </button>
                             </form>
                         </div>
@@ -231,11 +233,11 @@ const chartOptions = {
                                 
                                 <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
                                     <h3 class="font-bold text-slate-800 flex items-center text-sm uppercase tracking-wider">
-                                        <CalculatorIcon class="w-4 h-4 mr-2 text-rose-500" />
-                                        Projection Analysis
+                                        <CalculatorIcon class="w-4 h-4 mr-2 text-maroon-600" />
+                                        Analisis Proyeksi
                                     </h3>
                                     <span v-if="result" class="bg-emerald-100 text-emerald-700 text-xs font-bold px-2 py-1 rounded border border-emerald-200">
-                                        CALCULATION COMPLETE
+                                        KALKULASI SELESAI
                                     </span>
                                 </div>
 
@@ -272,8 +274,8 @@ const chartOptions = {
                                             <div class="w-32 h-32 bg-slate-100 rounded-full flex items-center justify-center mb-6 animate-pulse">
                                                 <CalculatorIcon class="w-12 h-12 text-slate-400" />
                                             </div>
-                                            <h4 class="text-xl font-bold text-slate-700">Ready for Analysis</h4>
-                                            <p class="text-slate-500 max-w-sm mt-2">Configure the parameters on the left panel and execute the simulation to visualize projected outcomes.</p>
+                                            <h4 class="text-xl font-bold text-slate-700">Siap untuk Analisis</h4>
+                                            <p class="text-slate-500 max-w-sm mt-2">Konfigurasikan parameter di panel kiri dan jalankan simulasi untuk memvisualisasikan hasil proyeksi.</p>
                                         </div>
                                     </transition>
                                 </div>

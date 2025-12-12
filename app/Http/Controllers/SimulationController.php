@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Node;
+use App\Models\SimulationResult;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -19,16 +20,17 @@ class SimulationController extends Controller
     {
         $validated = $request->validate([
             'node_id' => 'required|exists:nodes,id',
-            'indicator' => 'required|string', // Should match existing indicator for the node? Or arbitrary?
-            // "pilih node + pilih indikator". Usually means selecting existing one.
+            'indicator' => 'required|string',
             'old_score' => 'required|numeric',
             'change_percent' => 'required|numeric',
         ]);
 
         $newScore = $validated['old_score'] + ($validated['old_score'] * $validated['change_percent'] / 100);
+        $newScore = min(100, max(0, round($newScore, 1))); // Clamp between 0-100
 
-        $result = $request->user()->simulations()->create([
+        $result = SimulationResult::create([
             'node_id' => $validated['node_id'],
+            'user_id' => $request->user()->id,
             'indicator' => $validated['indicator'],
             'old_score' => $validated['old_score'],
             'new_score' => $newScore,
@@ -36,7 +38,7 @@ class SimulationController extends Controller
         ]);
 
         return redirect()->back()->with([
-            'success' => 'Simulation run successfully.',
+            'success' => 'Simulasi berhasil dijalankan.',
             'result' => $result
         ]);
     }

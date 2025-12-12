@@ -9,6 +9,7 @@ import {
     CheckCircleIcon,
     XCircleIcon,
     ClockIcon,
+    ScaleIcon,
 } from '@heroicons/vue/24/outline';
 
 const props = defineProps({
@@ -48,19 +49,19 @@ const formatCurrency = (amount) => {
 
     <AuthenticatedLayout>
         <div class="fixed inset-0 z-0 pointer-events-none">
-            <div class="absolute inset-0 bg-gradient-to-br from-slate-50 via-purple-50 to-pink-50"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-maroon-50 via-white to-gold-50"></div>
             <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
         </div>
 
         <template #header>
             <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div class="flex items-center space-x-4">
-                    <div class="p-3 bg-white rounded-xl shadow-sm border border-slate-200">
-                        <ChatBubbleLeftRightIcon class="w-8 h-8 text-purple-600" />
+                    <div class="p-3 bg-gradient-to-br from-maroon-100 to-maroon-200 rounded-xl border border-maroon-300">
+                        <ScaleIcon class="w-8 h-8 text-maroon-700" />
                     </div>
                     <div>
-                        <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Forum Masyarakat</h2>
-                        <p class="text-sm text-slate-500 mt-1">Berikan Penilaian dan Kritik untuk Kebijakan Pemerintah</p>
+                        <h2 class="text-2xl font-bold text-maroon-900 tracking-tight">Forum Masyarakat</h2>
+                        <p class="text-sm text-maroon-600 mt-1">⚖️ Berikan Penilaian & Kritik untuk Kebijakan Pemerintah</p>
                     </div>
                 </div>
             </div>
@@ -70,7 +71,7 @@ const formatCurrency = (amount) => {
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
                 
                 <!-- Info Banner -->
-                <div class="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl shadow-xl p-6 text-white">
+                <div class="bg-gradient-to-r from-maroon-700 to-maroon-900 rounded-2xl shadow-xl p-6 text-white">
                     <div class="flex items-start space-x-4">
                         <div class="flex-shrink-0">
                             <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">

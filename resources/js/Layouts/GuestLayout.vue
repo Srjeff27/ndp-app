@@ -5,12 +5,12 @@ import { GlobeAltIcon } from '@heroicons/vue/24/outline';
 </script>
 
 <template>
-    <div class="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50 to-slate-100 flex flex-col sm:justify-center items-center px-4 py-12 relative overflow-hidden">
+    <div class="min-h-screen bg-gradient-to-br from-maroon-50 via-white to-gold-50 flex flex-col sm:justify-center items-center px-4 py-12 relative overflow-hidden">
         <!-- Decorative Background -->
         <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-            <div class="absolute top-20 left-10 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
-            <div class="absolute top-40 right-10 w-72 h-72 bg-indigo-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
-            <div class="absolute -bottom-8 left-1/2 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+            <div class="absolute top-20 left-10 w-72 h-72 bg-maroon-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
+            <div class="absolute top-40 right-10 w-72 h-72 bg-maroon-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
+            <div class="absolute -bottom-8 left-1/2 w-72 h-72 bg-gold-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
         </div>
 
         <!-- Logo -->
@@ -29,7 +29,7 @@ import { GlobeAltIcon } from '@heroicons/vue/24/outline';
 
         <!-- Footer -->
         <div class="relative z-10 mt-8 text-center text-sm text-gray-600">
-            <p>&copy; {{ new Date().getFullYear() }} NeuroDemocracy Protocol</p>
+            <p>⚖️ {{ new Date().getFullYear() }} Democracy Protocol Policy</p>
         </div>
     </div>
 </template>

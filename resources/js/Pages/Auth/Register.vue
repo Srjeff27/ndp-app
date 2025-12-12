@@ -159,7 +159,7 @@ const submit = () => {
                         Sudah punya akun?
                         <Link
                             :href="route('login')"
-                            class="font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
+                            class="font-medium text-maroon-700 hover:text-maroon-600 transition-colors"
                         >
                             Masuk
                         </Link>

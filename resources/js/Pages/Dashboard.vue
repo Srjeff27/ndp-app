@@ -9,7 +9,8 @@ import {
     ClockIcon,
     ArrowTrendingUpIcon,
     BeakerIcon,
-    AcademicCapIcon
+    AcademicCapIcon,
+    ScaleIcon
 } from '@heroicons/vue/24/outline';
 
 const props = defineProps({
@@ -34,14 +35,14 @@ const chartData = {
         label: 'Metrik Sistem',
         data: [props.stats.nodes_count, props.stats.indicators_count, props.stats.discussions_count],
         backgroundColor: [
-            'rgba(79, 70, 229, 0.1)', // Indigo
+            'rgba(128, 0, 32, 0.1)', // Maroon
             'rgba(16, 185, 129, 0.1)', // Emerald
-            'rgba(245, 158, 11, 0.1)'  // Amber
+            'rgba(212, 164, 25, 0.1)'  // Gold
         ],
         borderColor: [
-            '#4f46e5',
+            '#800020',
             '#10b981',
-            '#f59e0b'
+            '#d4a419'
         ],
         borderWidth: 2,
         borderRadius: 6,
@@ -92,25 +93,25 @@ const chartOptions = {
 
     <AuthenticatedLayout>
         <div class="fixed inset-0 z-0 pointer-events-none">
-            <div class="absolute inset-0 bg-slate-50"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-maroon-50 via-white to-gold-50"></div>
             <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[100px]"></div>
-            <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[100px]"></div>
+            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-maroon-500/10 rounded-full blur-[100px]"></div>
+            <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gold-500/10 rounded-full blur-[100px]"></div>
         </div>
 
         <template #header>
             <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h2 class="text-3xl font-bold tracking-tight text-slate-900">
-                        Dashboard
+                    <h2 class="text-3xl font-bold tracking-tight text-maroon-900">
+                        ⚖️ Dashboard
                     </h2>
-                    <p class="mt-1 text-sm text-slate-500 flex items-center gap-2">
-                        <AcademicCapIcon class="w-4 h-4" />
-                        <span>Ikhtisar node riset dan indikator demokratis.</span>
+                    <p class="mt-1 text-sm text-maroon-600 flex items-center gap-2">
+                        <ScaleIcon class="w-4 h-4" />
+                        <span>Ikhtisar node riset dan indikator kebijakan pemerintah.</span>
                     </p>
                 </div>
-                <div class="flex items-center gap-3 text-sm font-medium text-slate-600 bg-white/50 px-4 py-2 rounded-lg border border-slate-200 backdrop-blur-sm">
-                    <ClockIcon class="w-4 h-4 text-indigo-500" />
+                <div class="flex items-center gap-3 text-sm font-medium text-maroon-700 bg-maroon-50/50 px-4 py-2 rounded-lg border border-maroon-200 backdrop-blur-sm">
+                    <ClockIcon class="w-4 h-4 text-maroon-600" />
                     {{ new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }}
                 </div>
             </div>
@@ -122,11 +123,11 @@ const chartOptions = {
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div class="group relative bg-white/70 backdrop-blur-xl border border-slate-200 rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                            <GlobeAltIcon class="w-16 h-16 text-indigo-600 rotate-12" />
+                            <ScaleIcon class="w-16 h-16 text-maroon-700 rotate-12" />
                         </div>
                         <div class="relative">
-                            <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                                <GlobeAltIcon class="w-6 h-6 text-indigo-600" />
+                            <div class="w-12 h-12 rounded-xl bg-maroon-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <ScaleIcon class="w-6 h-6 text-maroon-700" />
                             </div>
                             <p class="text-sm font-medium text-slate-500">Total Node</p>
                             <h3 class="text-3xl font-bold text-slate-900 mt-1">{{ stats.nodes_count }}</h3>

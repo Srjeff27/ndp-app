@@ -115,7 +115,7 @@ const submit = () => {
                     <Link
                         v-if="canResetPassword"
                         :href="route('password.request')"
-                        class="text-sm font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
+                        class="text-sm font-medium text-maroon-700 hover:text-maroon-600 transition-colors"
                     >
                         Lupa kata sandi?
                     </Link>
@@ -139,7 +139,7 @@ const submit = () => {
                         Belum punya akun?
                         <Link
                             :href="route('register')"
-                            class="font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
+                            class="font-medium text-maroon-700 hover:text-maroon-600 transition-colors"
                         >
                             Daftar
                         </Link>

@@ -20,10 +20,10 @@ const props = defineProps({
 
 const sizeClasses = computed(() => {
     const sizes = {
-        sm: 'w-6 h-6',
-        md: 'w-8 h-8',
-        lg: 'w-12 h-12',
-        xl: 'w-16 h-16'
+        sm: 'w-8 h-8',
+        md: 'w-10 h-10',
+        lg: 'w-14 h-14',
+        xl: 'w-20 h-20'
     };
     return sizes[props.size];
 });
@@ -41,8 +41,8 @@ const textSizeClasses = computed(() => {
 
 <template>
     <div class="flex items-center space-x-3">
-        <div :class="sizeClasses" class="flex-shrink-0 text-indigo-600">
-            <img src="/images/logo.svg" alt="Democracy Protocol Policy" class="w-full h-full" />
+        <div :class="sizeClasses" class="flex-shrink-0">
+            <img src="/images/logo-dpp.png" alt="Democracy Protocol Policy" class="w-full h-full object-contain rounded-lg" />
         </div>
         <span 
             v-if="variant === 'full'" 
