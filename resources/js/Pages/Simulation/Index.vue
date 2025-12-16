@@ -1,8 +1,8 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, useForm, usePage } from '@inertiajs/vue3';
+import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
 import ChartComponent from '@/Components/ChartComponent.vue';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import {
     BeakerIcon,
     ChartBarIcon,
@@ -13,16 +13,27 @@ import {
     PlayIcon,
     ArrowPathIcon,
     CalculatorIcon,
-    ScaleIcon
+    ScaleIcon,
+    CheckCircleIcon,
+    XCircleIcon,
+    MapPinIcon,
+    ExclamationTriangleIcon,
+    SparklesIcon,
+    FunnelIcon,
 } from '@heroicons/vue/24/outline';
 
 const props = defineProps({
-    nodes: Array
+    nodes: Array,
+    policies: Array,
 });
 
 const page = usePage();
 const result = computed(() => page.props.flash.result);
 
+// Tab state
+const activeTab = ref('simulation');
+
+// Simulation form
 const form = useForm({
     node_id: '',
     indicator: '',
@@ -60,8 +71,8 @@ const chartData = computed(() => {
             label: result.value.indicator,
             data: [result.value.old_score, result.value.new_score],
             backgroundColor: [
-                'rgba(148, 163, 184, 0.5)', // Slate for baseline
-                result.value.change_percent > 0 ? 'rgba(16, 185, 129, 0.8)' : 'rgba(244, 63, 94, 0.8)' // Emerald/Rose for result
+                'rgba(148, 163, 184, 0.5)',
+                result.value.change_percent > 0 ? 'rgba(16, 185, 129, 0.8)' : 'rgba(244, 63, 94, 0.8)'
             ],
             borderColor: [
                 'rgb(148, 163, 184)',
@@ -98,10 +109,21 @@ const chartOptions = {
         }
     }
 };
+
+// Results filter
+const selectedResultNode = ref('');
+
+const filteredPolicies = computed(() => {
+    if (!selectedResultNode.value) return props.policies;
+    return props.policies.filter(p => p.node_id === parseInt(selectedResultNode.value));
+});
+
+const approvedPolicies = computed(() => filteredPolicies.value.filter(p => p.is_approved));
+const rejectedPolicies = computed(() => filteredPolicies.value.filter(p => !p.is_approved));
 </script>
 
 <template>
-    <Head title="Simulation Engine" />
+    <Head title="Simulasi AI" />
 
     <AuthenticatedLayout>
         <div class="fixed inset-0 z-0 pointer-events-none">
@@ -125,9 +147,54 @@ const chartOptions = {
         <div class="relative z-10 py-8">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Tab Navigation -->
+                <div class="mb-8 bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl border border-slate-200 p-2">
+                    <div class="flex space-x-2">
+                        <button
+                            @click="activeTab = 'simulation'"
+                            :class="[
+                                'flex-1 flex items-center justify-center px-6 py-3 rounded-xl font-semibold text-sm transition-all',
+                                activeTab === 'simulation' 
+                                    ? 'bg-gradient-to-r from-maroon-700 to-maroon-800 text-white shadow-lg' 
+                                    : 'text-slate-600 hover:bg-slate-100'
+                            ]"
+                        >
+                            <BeakerIcon class="w-5 h-5 mr-2" />
+                            Simulasi Kebijakan
+                        </button>
+                        <button
+                            @click="activeTab = 'results'"
+                            :class="[
+                                'flex-1 flex items-center justify-center px-6 py-3 rounded-xl font-semibold text-sm transition-all',
+                                activeTab === 'results' 
+                                    ? 'bg-gradient-to-r from-maroon-700 to-maroon-800 text-white shadow-lg' 
+                                    : 'text-slate-600 hover:bg-slate-100'
+                            ]"
+                        >
+                            <ChartBarIcon class="w-5 h-5 mr-2" />
+                            Hasil Kebijakan
+                            <span class="ml-2 px-2 py-0.5 text-xs rounded-full" :class="activeTab === 'results' ? 'bg-white/20' : 'bg-slate-200'">
+                                {{ policies.length }}
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Simulation Tab Content -->
+                <div v-show="activeTab === 'simulation'" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                     
                     <div class="lg:col-span-4 space-y-6">
+                        <!-- Info Card -->
+                        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-4 border border-blue-200">
+                            <h4 class="font-bold text-blue-800 text-sm mb-2">💡 Cara Menggunakan Simulasi</h4>
+                            <ol class="text-xs text-blue-700 space-y-1 list-decimal list-inside">
+                                <li>Pilih <strong>Target Peta</strong> (institusi pemerintah)</li>
+                                <li>Pilih <strong>Indikator</strong> yang ingin disimulasikan</li>
+                                <li>Masukkan <strong>Variabel Dampak</strong> (persentase perubahan)</li>
+                                <li>Klik <strong>Jalankan Simulasi</strong> untuk melihat proyeksi</li>
+                            </ol>
+                        </div>
+
                         <div class="bg-white/80 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-xl overflow-hidden">
                             <div class="px-6 py-4 bg-slate-50/50 border-b border-slate-100 flex items-center justify-between">
                                 <h3 class="font-bold text-slate-800 flex items-center text-sm uppercase tracking-wider">
@@ -139,14 +206,15 @@ const chartOptions = {
 
                             <form @submit.prevent="submit" class="p-6 space-y-6">
                                 <div>
-                                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Target Node</label>
+                                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Target Peta</label>
+                                    <p class="text-xs text-slate-400 mb-2">Institusi pemerintah yang akan dianalisis.</p>
                                     <div class="relative">
                                         <select 
                                             v-model="form.node_id" 
                                             class="block w-full pl-10 pr-4 py-3 rounded-xl border-maroon-200 bg-maroon-50/50 focus:border-maroon-500 focus:ring-maroon-500 text-sm transition-shadow shadow-sm appearance-none"
                                             required
                                         >
-                                            <option value="" disabled>Select Institution...</option>
+                                            <option value="" disabled>Pilih Institusi...</option>
                                             <option v-for="node in nodes" :key="node.id" :value="node.id">{{ node.name }}</option>
                                         </select>
                                         <BuildingLibraryIcon class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
@@ -154,7 +222,8 @@ const chartOptions = {
                                 </div>
 
                                 <div class="relative">
-                                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Metric Indicator</label>
+                                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Indikator Metrik</label>
+                                    <p class="text-xs text-slate-400 mb-2">Aspek kebijakan yang akan diukur perubahannya.</p>
                                     <div class="relative">
                                         <select 
                                             v-model="form.indicator" 
@@ -163,7 +232,7 @@ const chartOptions = {
                                             :disabled="!selectedNode"
                                             required
                                         >
-                                            <option value="" disabled>Select Indicator...</option>
+                                            <option value="" disabled>Pilih Indikator...</option>
                                             <option v-for="entry in availableIndicators" :key="entry.id" :value="entry.indicator">
                                                 {{ entry.indicator }}
                                             </option>
@@ -175,7 +244,10 @@ const chartOptions = {
                                 <transition enter-active-class="transition ease-out duration-300" enter-from-class="opacity-0 -translate-y-2" enter-to-class="opacity-100 translate-y-0">
                                     <div v-if="form.indicator" class="bg-slate-100 rounded-xl p-4 border border-slate-200">
                                         <div class="flex justify-between items-end mb-2">
-                                            <span class="text-xs font-medium text-slate-500">Baseline Score</span>
+                                            <div>
+                                                <span class="text-xs font-medium text-slate-500">Skor Baseline</span>
+                                                <p class="text-[10px] text-slate-400">Nilai awal indikator saat ini</p>
+                                            </div>
                                             <span class="text-xl font-bold font-mono text-slate-900">{{ form.old_score }}</span>
                                         </div>
                                         <div class="w-full bg-slate-200 rounded-full h-1.5">
@@ -185,14 +257,15 @@ const chartOptions = {
                                 </transition>
 
                                 <div>
-                                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Impact Variable (%)</label>
+                                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Variabel Dampak (%)</label>
+                                    <p class="text-xs text-slate-400 mb-2">Persentase perubahan yang ingin disimulasikan terhadap skor baseline.</p>
                                     <div class="relative flex items-center">
                                         <button 
                                             type="button" 
                                             @click="form.change_percent--"
                                             class="p-3 bg-slate-100 hover:bg-rose-100 hover:text-rose-600 rounded-l-xl border border-r-0 border-slate-200 transition-colors"
                                         >
-                                            <span class="sr-only">Decrease</span>
+                                            <span class="sr-only">Kurangi</span>
                                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" /></svg>
                                         </button>
                                         <input 
@@ -207,11 +280,16 @@ const chartOptions = {
                                             @click="form.change_percent++"
                                             class="p-3 bg-slate-100 hover:bg-emerald-100 hover:text-emerald-600 rounded-r-xl border border-l-0 border-slate-200 transition-colors"
                                         >
-                                            <span class="sr-only">Increase</span>
+                                            <span class="sr-only">Tambah</span>
                                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
                                         </button>
                                     </div>
-                                    <p class="text-xs text-center text-slate-400 mt-2">Use negative values for regression scenarios.</p>
+                                    <div class="mt-2 p-2 bg-amber-50 border border-amber-200 rounded-lg">
+                                        <p class="text-[10px] text-amber-700">
+                                            <strong>Contoh:</strong> Jika baseline = 52 dan dampak = +10%, maka proyeksi = 52 + (52 × 10%) = <strong>57.2</strong><br>
+                                            Gunakan <strong>nilai negatif</strong> untuk simulasi penurunan (regresi).
+                                        </p>
+                                    </div>
                                 </div>
 
                                 <button 
@@ -252,12 +330,12 @@ const chartOptions = {
                                                 </div>
                                                 <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 relative overflow-hidden">
                                                     <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-transparent to-slate-200 opacity-20 rounded-bl-full"></div>
-                                                    <p class="text-xs text-slate-500 uppercase font-bold">Projected</p>
+                                                    <p class="text-xs text-slate-500 uppercase font-bold">Proyeksi</p>
                                                     <p class="text-3xl font-mono font-bold text-slate-900">{{ result.new_score.toFixed(1) }}</p>
                                                 </div>
                                                 <div class="p-4 rounded-xl border flex flex-col justify-center relative overflow-hidden" 
                                                     :class="result.change_percent > 0 ? 'bg-emerald-50 border-emerald-100 text-emerald-700' : 'bg-rose-50 border-rose-100 text-rose-700'">
-                                                    <p class="text-xs uppercase font-bold opacity-70">Impact Delta</p>
+                                                    <p class="text-xs uppercase font-bold opacity-70">Delta Dampak</p>
                                                     <div class="flex items-center">
                                                         <component :is="result.change_percent > 0 ? ArrowTrendingUpIcon : ArrowTrendingDownIcon" class="w-6 h-6 mr-2" />
                                                         <span class="text-3xl font-mono font-bold">{{ result.change_percent > 0 ? '+' : '' }}{{ result.change_percent }}%</span>
@@ -284,6 +362,169 @@ const chartOptions = {
                     </div>
 
                 </div>
+
+                <!-- Results Tab Content -->
+                <div v-show="activeTab === 'results'" class="space-y-8">
+                    
+                    <!-- Info Banner -->
+                    <div class="bg-gradient-to-r from-maroon-700 to-maroon-900 rounded-2xl shadow-xl p-6 text-white">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                                    <SparklesIcon class="w-6 h-6" />
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold mb-1">Sistem Penilaian Kebijakan</h3>
+                                <p class="text-white/90 text-sm">
+                                    🟢 <strong>Hijau (91-100%)</strong>: Kebijakan disetujui masyarakat dan dapat diterapkan.<br>
+                                    🔴 <strong>Merah (10-90%)</strong>: Kebijakan berisiko dan masyarakat tidak setuju. Perlu perbaikan.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Summary Stats -->
+                    <div class="flex items-center space-x-4">
+                        <div class="px-4 py-2 bg-green-100 rounded-lg border border-green-300 shadow-sm">
+                            <div class="flex items-center space-x-2">
+                                <CheckCircleIcon class="w-5 h-5 text-green-600" />
+                                <span class="text-sm font-bold text-green-700">{{ approvedPolicies.length }} Disetujui</span>
+                            </div>
+                        </div>
+                        <div class="px-4 py-2 bg-red-100 rounded-lg border border-red-300 shadow-sm">
+                            <div class="flex items-center space-x-2">
+                                <XCircleIcon class="w-5 h-5 text-red-600" />
+                                <span class="text-sm font-bold text-red-700">{{ rejectedPolicies.length }} Ditolak</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filter -->
+                    <div class="bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl border border-slate-200 p-6">
+                        <div class="flex items-center space-x-2 mb-4">
+                            <FunnelIcon class="w-5 h-5 text-slate-600" />
+                            <h3 class="font-bold text-slate-800">Filter Daerah</h3>
+                        </div>
+                        <select 
+                            v-model="selectedResultNode"
+                            class="w-full md:w-64 rounded-xl border-slate-200 bg-slate-50 focus:border-maroon-500 focus:ring-maroon-500"
+                        >
+                            <option value="">Semua Daerah</option>
+                            <option v-for="node in nodes" :key="node.id" :value="node.id">
+                                {{ node.name }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <!-- Approved Policies (Green) -->
+                    <div class="bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl border-2 border-green-300 p-6">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
+                                <CheckCircleIcon class="w-6 h-6 text-green-600" />
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-green-800">Kebijakan Disetujui</h3>
+                                <p class="text-sm text-green-600">Skor 91-100% • Dapat diterapkan</p>
+                            </div>
+                            <div class="ml-auto px-4 py-2 bg-green-600 text-white font-bold rounded-xl">
+                                {{ approvedPolicies.length }}
+                            </div>
+                        </div>
+
+                        <div v-if="approvedPolicies.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <Link 
+                                v-for="policy in approvedPolicies" 
+                                :key="policy.id"
+                                :href="route('labs.show', policy.id)"
+                                class="group p-4 bg-green-50 hover:bg-green-100 rounded-xl border border-green-200 transition-all"
+                            >
+                                <div class="flex items-start justify-between">
+                                    <div class="flex-1">
+                                        <h4 class="font-bold text-slate-900 group-hover:text-green-700 transition-colors">{{ policy.title }}</h4>
+                                        <p class="text-sm text-slate-600 mt-1 line-clamp-2">{{ policy.description }}</p>
+                                        <div class="flex items-center space-x-3 mt-3 text-xs text-slate-500">
+                                            <div class="flex items-center space-x-1">
+                                                <MapPinIcon class="w-4 h-4" />
+                                                <span>{{ policy.node?.name }}</span>
+                                            </div>
+                                            <span>•</span>
+                                            <span>{{ policy.reviews_count }} penilaian</span>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4 text-center flex-shrink-0">
+                                        <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex flex-col items-center justify-center shadow-lg">
+                                            <div class="text-xl font-bold text-white">{{ policy.average_score }}%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>
+                        
+                        <div v-else class="text-center py-8 text-green-600">
+                            <CheckCircleIcon class="w-12 h-12 mx-auto mb-2 opacity-50" />
+                            <p>Belum ada kebijakan yang mencapai persetujuan masyarakat (91%+)</p>
+                        </div>
+                    </div>
+
+                    <!-- Rejected Policies (Red) -->
+                    <div class="bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl border-2 border-red-300 p-6">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center">
+                                <ExclamationTriangleIcon class="w-6 h-6 text-red-600" />
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-red-800">Kebijakan Berisiko</h3>
+                                <p class="text-sm text-red-600">Skor 10-90% • Perlu perbaikan</p>
+                            </div>
+                            <div class="ml-auto px-4 py-2 bg-red-600 text-white font-bold rounded-xl">
+                                {{ rejectedPolicies.length }}
+                            </div>
+                        </div>
+
+                        <div v-if="rejectedPolicies.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <Link 
+                                v-for="policy in rejectedPolicies" 
+                                :key="policy.id"
+                                :href="route('labs.show', policy.id)"
+                                class="group p-4 bg-red-50 hover:bg-red-100 rounded-xl border border-red-200 transition-all"
+                            >
+                                <div class="flex items-start justify-between">
+                                    <div class="flex-1">
+                                        <h4 class="font-bold text-slate-900 group-hover:text-red-700 transition-colors">{{ policy.title }}</h4>
+                                        <p class="text-sm text-slate-600 mt-1 line-clamp-2">{{ policy.description }}</p>
+                                        <div class="flex items-center space-x-3 mt-3 text-xs text-slate-500">
+                                            <div class="flex items-center space-x-1">
+                                                <MapPinIcon class="w-4 h-4" />
+                                                <span>{{ policy.node?.name }}</span>
+                                            </div>
+                                            <span>•</span>
+                                            <span>{{ policy.reviews_count }} penilaian</span>
+                                        </div>
+                                        <!-- AI Recommendation Preview -->
+                                        <div v-if="policy.recommendation" class="mt-3 p-2 bg-amber-50 border border-amber-200 rounded-lg">
+                                            <p class="text-xs text-amber-800 line-clamp-2">
+                                                <strong>💡 Rekomendasi AI:</strong> {{ policy.recommendation.recommendation }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4 text-center flex-shrink-0">
+                                        <div class="w-16 h-16 bg-gradient-to-br from-red-400 to-red-600 rounded-xl flex flex-col items-center justify-center shadow-lg">
+                                            <div class="text-xl font-bold text-white">{{ policy.average_score }}%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>
+                        
+                        <div v-else class="text-center py-8 text-red-600">
+                            <XCircleIcon class="w-12 h-12 mx-auto mb-2 opacity-50" />
+                            <p>Tidak ada kebijakan berisiko. Semua kebijakan disetujui masyarakat!</p>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         </div>
     </AuthenticatedLayout>

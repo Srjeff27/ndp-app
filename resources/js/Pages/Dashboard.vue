@@ -30,7 +30,7 @@ const formatDate = (dateString) => {
 
 // Konfigurasi Chart
 const chartData = {
-    labels: ['Node Pemerintahan', 'Indikator', 'Lab Aktif'],
+    labels: ['Peta Pemerintahan', 'Indikator', 'Lab Aktif'],
     datasets: [{
         label: 'Metrik Sistem',
         data: [props.stats.nodes_count, props.stats.indicators_count, props.stats.discussions_count],

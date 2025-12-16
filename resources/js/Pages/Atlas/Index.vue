@@ -117,11 +117,11 @@ const getCategoryIcon = (category) => {
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <!-- Search -->
                         <div>
-                            <label class="block text-xs font-medium text-slate-600 mb-2">Cari Kebijakan</label>
+                            <label class="block text-xs font-medium text-slate-600 mb-2">Cari Daerah</label>
                             <input 
                                 v-model="searchQuery"
                                 type="text"
-                                placeholder="Cari judul atau deskripsi..."
+                                placeholder="Cari nama daerah..."
                                 class="w-full rounded-lg border-maroon-200 bg-maroon-50/50 focus:border-maroon-500 focus:ring-maroon-500 text-sm"
                             />
                         </div>

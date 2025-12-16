@@ -15,14 +15,15 @@ import {
     UserCircleIcon,
     Cog6ToothIcon,
     ArrowRightOnRectangleIcon,
-    ScaleIcon
+    ScaleIcon,
+    CheckBadgeIcon
 } from '@heroicons/vue/24/outline';
 
 const showingNavigationDropdown = ref(false);
 
 const navigation = [
     { name: 'Dashboard', route: 'dashboard', icon: Squares2X2Icon },
-    { name: 'Node Pemerintahan', route: 'nodes.index', icon: GlobeAltIcon },
+    { name: 'Peta Pemerintahan', route: 'nodes.index', icon: GlobeAltIcon },
     { name: 'Peta Akuntabilitas', route: 'atlas.index', icon: ChartBarIcon },
     { name: 'Forum Masyarakat', route: 'labs.index', icon: ChatBubbleLeftRightIcon },
     { name: 'Simulasi AI', route: 'simulation.index', icon: BeakerIcon }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Node;
+use App\Models\Policy;
 use App\Models\SimulationResult;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -11,8 +12,33 @@ class SimulationController extends Controller
 {
     public function index()
     {
+        $policies = Policy::with(['node', 'reviews', 'recommendation'])
+            ->withCount('reviews')
+            ->latest()
+            ->get()
+            ->map(function ($policy) {
+                $avgScore = $policy->averageScore();
+
+                return [
+                    'id' => $policy->id,
+                    'node_id' => $policy->node_id,
+                    'title' => $policy->title,
+                    'description' => $policy->description,
+                    'category' => $policy->category,
+                    'node' => $policy->node,
+                    'reviews_count' => $policy->reviews_count,
+                    'average_score' => round($avgScore, 2),
+                    'is_approved' => $avgScore >= 91,
+                    'recommendation' => $policy->recommendation ? [
+                        'recommendation' => $policy->recommendation->recommendation,
+                        'ai_analysis' => $policy->recommendation->ai_analysis,
+                    ] : null,
+                ];
+            });
+
         return Inertia::render('Simulation/Index', [
-            'nodes' => Node::with('atlasEntries')->get()
+            'nodes' => Node::with('atlasEntries')->get(),
+            'policies' => $policies,
         ]);
     }
 
@@ -39,7 +65,7 @@ class SimulationController extends Controller
 
         return redirect()->back()->with([
             'success' => 'Simulasi berhasil dijalankan.',
-            'result' => $result
+            'result' => $result,
         ]);
     }
 }

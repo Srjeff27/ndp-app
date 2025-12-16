@@ -43,7 +43,7 @@ const submit = () => {
 </script>
 
 <template>
-    <Head title="Node Pemerintahan" />
+    <Head title="Peta Pemerintahan" />
 
     <AuthenticatedLayout>
         <div class="fixed inset-0 z-0 pointer-events-none">
@@ -60,7 +60,7 @@ const submit = () => {
                         <ScaleIcon class="w-8 h-8 text-maroon-700" />
                     </div>
                     <div>
-                        <h2 class="text-2xl font-bold text-maroon-900 tracking-tight">⚖️ Node Pemerintahan</h2>
+                        <h2 class="text-2xl font-bold text-maroon-900 tracking-tight">🗺️ Peta Pemerintahan</h2>
                         <div class="flex items-center space-x-2 text-sm text-maroon-600">
                             <span class="relative flex h-2 w-2">
                                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -77,7 +77,7 @@ const submit = () => {
                     class="group inline-flex items-center justify-center px-5 py-2.5 bg-maroon-700 hover:bg-maroon-800 text-white font-semibold rounded-lg shadow-lg hover:shadow-maroon-500/30 transition-all duration-300"
                 >
                     <component :is="showForm ? XMarkIcon : PlusIcon" class="w-5 h-5 mr-2 transition-transform group-hover:rotate-90" />
-                    {{ showForm ? 'Batal' : 'Daftarkan Node' }}
+                    {{ showForm ? 'Batal' : 'Daftarkan Peta' }}
                 </button>
             </div>
         </template>
@@ -178,7 +178,7 @@ const submit = () => {
                                     class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-xl shadow-md transition-all disabled:opacity-50"
                                 >
                                     <MapPinIcon class="w-5 h-5 mr-2" />
-                                    Inisialisasi Node
+                                    Inisialisasi Peta
                                 </button>
                             </div>
                         </form>
@@ -192,7 +192,7 @@ const submit = () => {
                                 <SignalIcon class="w-5 h-5 mr-2 text-emerald-400 animate-pulse" />
                                 Topologi Jaringan
                             </h3>
-                            <p class="text-slate-300 text-xs shadow-black drop-shadow-md pl-7">{{ nodes.length }} node aktif terhubung</p>
+                            <p class="text-slate-300 text-xs shadow-black drop-shadow-md pl-7">{{ nodes.length }} peta aktif terhubung</p>
                         </div>
                         <div class="bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 text-xs font-mono text-white">
                             TAMPILAN LANGSUNG
@@ -206,7 +206,7 @@ const submit = () => {
 
                 <div class="pt-8">
                     <div class="flex items-center justify-between mb-6">
-                        <h3 class="text-xl font-bold text-slate-900">Node Terdaftar</h3>
+                        <h3 class="text-xl font-bold text-slate-900">Peta Terdaftar</h3>
                         <div class="text-sm text-slate-500">Diurutkan berdasarkan aktivitas terbaru</div>
                     </div>
 
@@ -256,7 +256,7 @@ const submit = () => {
                         </div>
                         <h3 class="text-xl font-bold text-slate-900">Jaringan Offline</h3>
                         <p class="text-slate-500 mt-2 max-w-sm mx-auto mb-8">
-                            Belum ada node pemerintahan yang terdaftar dalam sistem. Inisialisasi node pertama untuk memulai pemetaan.
+                            Belum ada peta pemerintahan yang terdaftar dalam sistem. Inisialisasi peta pertama untuk memulai pemetaan.
                         </p>
                         <button
                             v-if="canManageNodes"
@@ -264,7 +264,7 @@ const submit = () => {
                             class="inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl transition-all shadow-lg hover:shadow-indigo-500/25"
                         >
                             <PlusIcon class="w-5 h-5 mr-2" />
-                            Inisialisasi Node Pertama
+                            Inisialisasi Peta Pertama
                         </button>
                     </div>
                 </div>

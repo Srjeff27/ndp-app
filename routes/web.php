@@ -38,6 +38,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/simulation', [SimulationController::class, 'index'])->name('simulation.index');
     Route::post('/simulation', [SimulationController::class, 'store'])->name('simulation.store');
 
+    // Results - Policy Approval Summary
+    Route::get('/results', [PolicyController::class, 'results'])->name('results.index');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
